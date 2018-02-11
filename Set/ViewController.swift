@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     
     //    MARK: - Instance Variables
     
-    let figures = ["●", "▲", "■"]
+    var game = Set()
+    
     
     //    MARK: - Outlets
 
@@ -25,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        
+        game = Set()
     }
     
     //    MARK: - etc
