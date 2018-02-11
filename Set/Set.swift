@@ -15,9 +15,10 @@ class Set {
     let figures = ["●", "▲", "■"]
     let number = 1...3
     let shading = ["solid", "striped", "open"]
+    let color = ["blue", "green", "red"]
     
     var cardCount: Int {
-        return figures.count * number.count * shading.count
+        return figures.count * number.count * shading.count * color.count
     }
     
     // game rules
@@ -49,7 +50,9 @@ class Set {
         for f in figures {
             for n in number {
                 for s in shading {
-                    allCards.append(Card(figure: f, number: n, shading: s))
+                    for c in color{
+                        allCards.append(Card(figure: f, number: n, shading: s, color: c))
+                    }
                 }
             }
         }

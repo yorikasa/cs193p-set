@@ -14,6 +14,7 @@ struct Card {
     let figure: String
     let number: Int
     let shading: String
+    let color: String
     
     var isOpen: Bool
     
@@ -24,12 +25,13 @@ struct Card {
         return self.idGenerator
     }
     
-    init(figure: String, number: Int, shading: String){
+    init(figure: String, number: Int, shading: String, color: String){
         self.id = Card.createId()
         
         self.figure = figure
         self.number = number
         self.shading = shading
+        self.color = color
         
         self.isOpen = false
     }
