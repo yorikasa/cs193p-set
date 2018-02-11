@@ -15,6 +15,8 @@ struct Card {
     let number: Int
     let shading: String
     
+    var isOpen: Bool
+    
     static var idGenerator = 0
     
     static func createId() -> Int {
@@ -28,5 +30,7 @@ struct Card {
         self.figure = figure
         self.number = number
         self.shading = shading
+        
+        self.isOpen = false
     }
 }
