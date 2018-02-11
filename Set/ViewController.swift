@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func startNewGame(_ sender: UIButton) {
+        
+    }
     
     //    MARK: - etc
     
