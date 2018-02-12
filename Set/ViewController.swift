@@ -46,7 +46,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //game = Set(initialVisibleCards: cardButtons.count)
+        for i in cardButtons.indices {
+            cardButtons[i].tag = game.openCards[i].id
+        }
     }
 
     override func didReceiveMemoryWarning() {
