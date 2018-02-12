@@ -23,28 +23,72 @@ class Set {
     
     // game rules
     let initialVisibleCards: Int = 12
-    var cardsSelecting: [Card] = []
     
     var allCards: [Card]
     var openCards: [Card] {
         return allCards.filter({$0.isOpen == true})
     }
+    var selectedCards: [Card] {
+        return allCards.filter({$0.isSelected == true})
+    }
     
     //    MARK: - Methods
     
+    func selectCard(at cardButtonIndex: Int) {
+        // If already selected, then deselect (true -> false)
+        // If not selected, then select (false -> true)
+        allCards[cardButtonIndex].isSelected = !allCards[cardButtonIndex].isSelected
+        
+        if selectedCards.count > 3 {
+            for index in allCards.indices {
+                allCards[index].isSelected = false
+            }
+        } else if selectedCards.count == 3 {
+            // check if three cards match
+            if formsSet(with: selectedCards) {
+                // three cards formed a set
+                for card in selectedCards {
+                    allCards[card.id].isSet = true
+                    allCards[card.id].isOpen = false
+                    allCards[card.id].isSelected = false
+                }
+            } else {
+                // cards didn't form a set
+                for card in selectedCards {
+                    allCards[card.id].isSelected = false
+                }
+            }
+        }
+        
+    }
+    
+    func formsSet(with cards: [Card]) -> Bool {
+        // If all attributes of 3 cards are either different or same, they make a set
+        // e.g. figures of all cards are same (●)
+        //      number  of all cards are same (1)
+        //      shading of all cards are different (solid, striped, and open)
+        //      color   of all cards are same (blue)
+        // these cards form a set!
+
+        return true
+    }
+    
     // Return index of a random card, which is not yet open (is in card stack) from allCards
-    func randomCardIndexFromStack() -> Int {
-        repeat {
-            let randomCardNumber = Int(arc4random_uniform(UInt32(cardCount)))
-            if let cardIndex = allCards.index(where: {$0.id == randomCardNumber}) {
+    func randomCardIndexFromStack() -> Int? {
+        for _ in 1...cardCount {
+            let randomCardId = Int(arc4random_uniform(UInt32(cardCount)))
+            if let cardIndex = allCards.index(where: {$0.id == randomCardId}) {
                 if allCards[cardIndex].isOpen == false {
                     return cardIndex
                 }
             }
-        }while(true)
+        }
+        return nil
     }
     
-    init() {
+    init(initialVisibleCards: Int) {
+        Card.idGenerator = 0
+        
         // Initialize all 81 cards
         allCards = []
         for f in figures {
@@ -59,7 +103,9 @@ class Set {
         
         // Open <initialVisibleCards> cards randomly
         for _ in 1...initialVisibleCards {
-            allCards[randomCardIndexFromStack()].isOpen = true
+            if let random = randomCardIndexFromStack() {
+                allCards[random].isOpen = true
+            }
         }
     }
 }

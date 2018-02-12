@@ -99,28 +99,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8vQ-AV-Rbe"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8vQ-AV-Rbe"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="br4-Ik-HQc">
                                         <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i4x-BL-eG3"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i4x-BL-eG3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-eu-ige">
                                         <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YSx-AA-1HX"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YSx-AA-1HX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9RW-VU-EyW">
                                         <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5QK-x8-RKK"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5QK-x8-RKK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -135,28 +135,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4gb-r7-lKx"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4gb-r7-lKx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46i-H1-74A">
                                         <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VkJ-If-bi6"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VkJ-If-bi6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pys-7a-che">
                                         <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iqW-3P-qPd"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iqW-3P-qPd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gs-tr-eGX">
                                         <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xRl-s1-nWv"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xRl-s1-nWv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -171,28 +171,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nt6-jh-xRI"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nt6-jh-xRI"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbJ-ie-ZTi">
                                         <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bfg-Pw-q3p"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bfg-Pw-q3p"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKZ-yp-9Xg">
                                         <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dtu-HG-RCT"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dtu-HG-RCT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBE-r5-U0B">
                                         <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="100"/>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="selectCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N4d-rr-psI"/>
+                                            <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N4d-rr-psI"/>
                                         </connections>
                                     </button>
                                 </subviews>

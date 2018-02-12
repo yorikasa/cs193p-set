@@ -17,6 +17,8 @@ struct Card {
     let color: String
     
     var isOpen: Bool
+    var isSelected: Bool
+    var isSet: Bool
     
     static var idGenerator = 0
     
@@ -34,5 +36,7 @@ struct Card {
         self.color = color
         
         self.isOpen = false
+        self.isSelected = false
+        self.isSet = false
     }
 }
