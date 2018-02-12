@@ -31,9 +31,7 @@ class ViewController: UIViewController {
     // UI Elements (View) has its attributes and Model (Cards struct) has its attributes.
     // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
-        if let selectedCardButtonIndex = cardButtons.index(of: sender) {
-            game.selectCard(at: selectedCardButtonIndex)
-        }
+        game.selectCard(at: sender.tag)
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
