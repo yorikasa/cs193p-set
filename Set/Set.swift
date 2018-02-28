@@ -12,10 +12,10 @@ class Set {
     //    MARK: - Variables
     
     // card variations
-    let figures = ["●", "▲", "■"]
-    let number = 1...3
-    let shading = ["solid", "striped", "open"]
-    let color = ["blue", "green", "red"]
+    let figures: [String]
+    let number: Range<Int>
+    let shading: [String]
+    let color: [Int]
     
     var cardCount: Int {
         return figures.count * number.count * shading.count * color.count
