@@ -12,7 +12,15 @@ class ViewController: UIViewController {
     
     //    MARK: - Instance Variables
     
-    lazy var game = Set(initialVisibleCards: cardButtons.count)
+    // card variations
+    let figures = ["●", "▲", "■"]
+    let number = 1...3
+    let shading = ["solid", "striped", "open"]
+    let color = ["blue", "green", "red"]
+    
+    lazy var game = Set(initialVisibleCards: cardButtons.count, figures: figures, number: number, shading: shading, color: color)
+    
+
     
     //    MARK: - Outlets
 
@@ -35,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        game = Set(initialVisibleCards: cardButtons.count)
+        game = Set(initialVisibleCards: cardButtons.count, figures: figures, number: number, shading: shading, color: color)
         for i in cardButtons.indices {
             cardButtons[i].tag = game.openCards[i].id
         }
