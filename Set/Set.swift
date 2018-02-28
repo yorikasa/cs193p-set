@@ -88,8 +88,13 @@ class Set {
         return nil
     }
     
-    init(initialVisibleCards: Int) {
+    init(initialVisibleCards: Int, figures: [String], number: Range<Int>, shading: [String], color: [String]) {
         Card.idGenerator = 0
+        
+        self.figures = figures
+        self.number = number
+        self.shading = shading
+        self.color = color
         
         // Initialize all 81 cards
         allCards = []
