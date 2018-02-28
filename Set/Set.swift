@@ -13,9 +13,9 @@ class Set {
     
     // card variations
     let figures: [String]
-    let number: Range<Int>
+    let number: CountableClosedRange<Int>
     let shading: [String]
-    let color: [Int]
+    let color: [String]
     
     var cardCount: Int {
         return figures.count * number.count * shading.count * color.count
@@ -88,7 +88,7 @@ class Set {
         return nil
     }
     
-    init(initialVisibleCards: Int, figures: [String], number: Range<Int>, shading: [String], color: [String]) {
+    init(initialVisibleCards: Int, figures: [String], number: CountableClosedRange<Int>, shading: [String], color: [String]) {
         Card.idGenerator = 0
         
         self.figures = figures
