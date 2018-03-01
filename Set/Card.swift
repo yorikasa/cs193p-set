@@ -11,10 +11,10 @@ import Foundation
 struct Card {
     let id: Int
     
-    let figure: String
-    let number: Int
-    let shading: String
-    let color: String
+    let figureId: Int
+    let numberId: Int
+    let shadingId: Int
+    let colorId: Int
     
     var isOpen: Bool
     var isSelected: Bool
@@ -27,13 +27,13 @@ struct Card {
         return self.idGenerator
     }
     
-    init(figure: String, number: Int, shading: String, color: String){
+    init(figure: Int, number: Int, shading: Int, color: Int){
         self.id = Card.createId()
         
-        self.figure = figure
-        self.number = number
-        self.shading = shading
-        self.color = color
+        self.figureId = figure
+        self.numberId = number
+        self.shadingId = shading
+        self.colorId = color
         
         self.isOpen = false
         self.isSelected = false

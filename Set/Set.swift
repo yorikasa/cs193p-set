@@ -12,13 +12,13 @@ class Set {
     //    MARK: - Variables
     
     // card variations
-    let figures: [String]
-    let number: CountableClosedRange<Int>
-    let shading: [String]
-    let color: [String]
+    let figuresNum: Int
+    let numberNum: Int
+    let shadingNum: Int
+    let colorNum: Int
     
     var cardCount: Int {
-        return figures.count * number.count * shading.count * color.count
+        return figuresNum * numberNum * shadingNum * colorNum
     }
     
     // game rules
@@ -88,20 +88,20 @@ class Set {
         return nil
     }
     
-    init(initialVisibleCards: Int, figures: [String], number: CountableClosedRange<Int>, shading: [String], color: [String]) {
+    init(initialVisibleCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
-        self.figures = figures
-        self.number = number
-        self.shading = shading
-        self.color = color
+        figuresNum = figures
+        numberNum = number
+        shadingNum = shading
+        colorNum = color
         
         // Initialize all 81 cards
         allCards = []
-        for f in figures {
-            for n in number {
-                for s in shading {
-                    for c in color{
+        for f in 1...figuresNum {
+            for n in 1...numberNum {
+                for s in 1...shadingNum {
+                    for c in 1...colorNum {
                         allCards.append(Card(figure: f, number: n, shading: s, color: c))
                     }
                 }

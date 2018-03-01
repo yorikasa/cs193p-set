@@ -14,11 +14,13 @@ class ViewController: UIViewController {
     
     // card variations
     let figures = ["●", "▲", "■"]
-    let number = 1...3
+    let number = [1,2,3]
     let shading = ["solid", "striped", "open"]
-    let color = ["blue", "green", "red"]
+    let color = [UIColor.blue, UIColor.green, UIColor.red]
     
-    lazy var game = Set(initialVisibleCards: cardButtons.count, figures: figures, number: number, shading: shading, color: color)
+    lazy var game = Set(initialVisibleCards: cardButtons.count,
+                        figures: figures.count, number: number.count,
+                        shading: shading.count, color: color.count)
     
 
     
@@ -43,7 +45,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        game = Set(initialVisibleCards: cardButtons.count, figures: figures, number: number, shading: shading, color: color)
+        game = Set(initialVisibleCards: cardButtons.count,
+                   figures: figures.count, number: number.count,
+                   shading: shading.count, color: color.count)
         for i in cardButtons.indices {
             cardButtons[i].tag = game.openCards[i].id
             drawCardButton(cardButton: cardButtons[i])
