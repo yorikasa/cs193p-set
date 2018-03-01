@@ -98,10 +98,10 @@ class Set {
         
         // Initialize all 81 cards
         allCards = []
-        for f in 1...figuresNum {
-            for n in 1...numberNum {
-                for s in 1...shadingNum {
-                    for c in 1...colorNum {
+        for f in 0..<figuresNum {
+            for n in 0..<numberNum {
+                for s in 0..<shadingNum {
+                    for c in 0..<colorNum {
                         allCards.append(Card(figure: f, number: n, shading: s, color: c))
                     }
                 }

@@ -58,10 +58,17 @@ class ViewController: UIViewController {
     func drawCardButton(cardButton : UIButton) {
         // TODO: Remove Force unwrapping (!)
         let card = game.allCards.filter({$0.id == cardButton.tag}).first!
-        let attributes: [NSAttributedStringKey : Any] = [
-            .strokeColor : UIColor.blue
+        var attributes: [NSAttributedStringKey : Any] = [
+            .foregroundColor: color[card.colorId]
         ]
-        let attributedString = NSAttributedString(string: String(repeating: card.figure, count: card.number), attributes: attributes)
+        if card.shadingId == shading.index(of: "open") {
+            attributes[.strokeColor] = color[card.colorId]
+            attributes[.strokeWidth] = 10.0
+        } else if card.shadingId == shading.index(of: "striped") {
+            attributes[.underlineColor] = color[card.colorId]
+            attributes[.underlineStyle] = NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.styleSingle.rawValue
+        }
+        let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
         cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
     }
     
