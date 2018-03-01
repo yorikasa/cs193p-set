@@ -46,8 +46,21 @@ class ViewController: UIViewController {
         game = Set(initialVisibleCards: cardButtons.count, figures: figures, number: number, shading: shading, color: color)
         for i in cardButtons.indices {
             cardButtons[i].tag = game.openCards[i].id
+            drawCardButton(cardButton: cardButtons[i])
         }
     }
+    
+    // MARK: - Functions
+    func drawCardButton(cardButton : UIButton) {
+        // TODO: Remove Force unwrapping (!)
+        let card = game.allCards.filter({$0.id == cardButton.tag}).first!
+        let attributes: [NSAttributedStringKey : Any] = [
+            .strokeColor : UIColor.blue
+        ]
+        let attributedString = NSAttributedString(string: String(repeating: card.figure, count: card.number), attributes: attributes)
+        cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
+    }
+    
     
     //    MARK: - etc
     
