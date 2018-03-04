@@ -79,7 +79,31 @@ class Set {
         //      shading of all cards are different (solid, striped, and open)
         //      color   of all cards are same (blue)
         // these cards form a set!
-
+        var figures: [Int] = []
+        var numbers: [Int] = []
+        var shading: [Int] = []
+        var colors: [Int] = []
+        
+        for card in cards {
+            figures.append(card.figureId)
+            numbers.append(card.numberId)
+            shading.append(card.shadingId)
+            colors.append(card.colorId)
+        }
+        
+        if !(figures.hasAllSameElements || figures.hasAllDifferentElements) {
+            return false
+        }
+        if !(numbers.hasAllSameElements || numbers.hasAllDifferentElements) {
+            return false
+        }
+        if !(shading.hasAllSameElements || shading.hasAllDifferentElements) {
+            return false
+        }
+        if !(colors.hasAllSameElements || colors.hasAllDifferentElements) {
+            return false
+        }
+        
         return true
     }
     
