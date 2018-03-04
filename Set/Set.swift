@@ -124,3 +124,21 @@ class Set {
         }
     }
 }
+
+
+extension Array where Element: Equatable {
+    // If all the array's elements are same
+    // like [1, 1, 1 ,1]
+    var hasAllSameElements: Bool{
+        if let firstElement = self.first {
+            for e in self {
+                if e != firstElement {
+                    return false
+                }
+            }
+        } else {
+            return false
+        }
+        return true
+    }
+}
