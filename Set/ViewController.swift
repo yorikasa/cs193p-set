@@ -61,6 +61,7 @@ class ViewController: UIViewController {
         for i in cardButtons.indices {
             cardButtons[i].tag = game.openCards[i].id
             drawCardButton(cardButton: cardButtons[i])
+            dehighlightCard(cardButton: cardButtons[i])
         }
     }
     
