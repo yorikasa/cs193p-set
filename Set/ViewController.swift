@@ -73,14 +73,14 @@ class ViewController: UIViewController {
         cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
     }
     
-    func toggleHighlightCard(cardButton: UIButton) {
-        if cardButton.layer.borderWidth == 2.0 {
-            cardButton.layer.borderWidth = 0
-            cardButton.layer.borderColor = nil
-        } else {
-            cardButton.layer.borderWidth = 2.0
-            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-        }
+    func highlightCard(cardButton: UIButton) {
+        cardButton.layer.borderWidth = 2.0
+        cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    }
+    
+    func dehighlightCard(cardButton: UIButton) {
+        cardButton.layer.borderWidth = 0
+        cardButton.layer.borderColor = nil
     }
     
     
