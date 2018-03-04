@@ -42,7 +42,16 @@ class ViewController: UIViewController {
     // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
-        toggleHighlightCard(cardButton: sender)
+        
+        for card in game.allCards {
+            if let cardButton = cardButtons.filter({$0.tag == card.id}).first {
+                if card.isSelected {
+                    highlightCard(cardButton: cardButton)
+                } else {
+                    dehighlightCard(cardButton: cardButton)
+                }
+            }
+        }
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
