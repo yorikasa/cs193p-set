@@ -35,31 +35,40 @@ class Set {
     //    MARK: - Methods
     
     func selectCard(at id: Int) {
-        
-        if selectedCards.count > 3 {
-            for index in allCards.indices {
-                allCards[index].isSelected = false
-            }
-        } else if selectedCards.count == 3 {
-            // check if three cards match
-            if formsSet(with: selectedCards) {
-                // three cards formed a set
-                for card in selectedCards {
-                    allCards[card.id].isSet = true
-                    allCards[card.id].isOpen = false
-                    allCards[card.id].isSelected = false
-                }
-            } else {
-                // cards didn't form a set
-                for card in selectedCards {
-                    allCards[card.id].isSelected = false
-                }
-            }
-        }
         // If already selected, then deselect (true -> false)
         // If not selected, then select (false -> true)
         if let cardIndex = allCards.index(where: {$0.id == id}) {
             allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+        }
+        
+        // New card selected after 3 cards were un/matched
+        // (already 3 cards are selected)
+        //
+        // Reset all selected cards states to unselected, and select the new card
+        if selectedCards.count > 3 {
+            for index in allCards.indices {
+                allCards[index].isSelected = false
+            }
+            if let cardIndex = allCards.index(where: {$0.id == id}) {
+                allCards[cardIndex].isSelected = true
+            }
+        }
+        // This selection adds the 3rd card to the selection
+        //
+        // Check if these 3 cards match
+        else if selectedCards.count == 3 {
+            if formsSet(with: selectedCards) {
+                // three cards formed a set
+                for card in selectedCards {
+                    if let cardIndex = allCards.index(where: {$0.id == card.id}) {
+                        allCards[cardIndex].isSet = true
+                    }
+                }
+            }
+        }
+        // This is the first/2nd card selected
+        else {
+            // Do nothing
         }
     }
     
