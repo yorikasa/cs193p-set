@@ -35,11 +35,6 @@ class Set {
     //    MARK: - Methods
     
     func selectCard(at id: Int) {
-        // If already selected, then deselect (true -> false)
-        // If not selected, then select (false -> true)
-        if let cardIndex = allCards.index(where: {$0.id == id}) {
-            allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
-        }
         
         if selectedCards.count > 3 {
             for index in allCards.indices {
@@ -61,7 +56,11 @@ class Set {
                 }
             }
         }
-        
+        // If already selected, then deselect (true -> false)
+        // If not selected, then select (false -> true)
+        if let cardIndex = allCards.index(where: {$0.id == id}) {
+            allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+        }
     }
     
     func formsSet(with cards: [Card]) -> Bool {
