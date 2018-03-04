@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
+        toggleHighlightCard(cardButton: sender)
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
@@ -70,6 +71,16 @@ class ViewController: UIViewController {
         }
         let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
         cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
+    }
+    
+    func toggleHighlightCard(cardButton: UIButton) {
+        if cardButton.layer.borderWidth == 2.0 {
+            cardButton.layer.borderWidth = 0
+            cardButton.layer.borderColor = nil
+        } else {
+            cardButton.layer.borderWidth = 2.0
+            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        }
     }
     
     
