@@ -141,4 +141,15 @@ extension Array where Element: Equatable {
         }
         return true
     }
+    
+    // If all the array's elements are different
+    // like [1, 2, 3, 4]
+    var hasAllDifferentElements: Bool {
+        for element in self {
+            if self.filter({$0 == element}).count > 1 {
+                return false
+            }
+        }
+        return true
+    }
 }
