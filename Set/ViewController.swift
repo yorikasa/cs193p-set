@@ -55,14 +55,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        game = Set(initialVisibleCards: cardButtons.count,
-                   figures: figures.count, number: number.count,
-                   shading: shading.count, color: color.count)
-        for i in cardButtons.indices {
-            cardButtons[i].tag = game.openCards[i].id
-            drawCardButton(cardButton: cardButtons[i])
-            dehighlightCard(cardButton: cardButtons[i])
-        }
+        reset()
     }
     
     // MARK: - Functions
@@ -93,15 +86,24 @@ class ViewController: UIViewController {
         cardButton.layer.borderColor = nil
     }
     
+    func reset() {
+        game = Set(initialVisibleCards: cardButtons.count,
+                   figures: figures.count, number: number.count,
+                   shading: shading.count, color: color.count)
+        for i in cardButtons.indices {
+            cardButtons[i].tag = game.openCards[i].id
+            drawCardButton(cardButton: cardButtons[i])
+            dehighlightCard(cardButton: cardButtons[i])
+        }
+    }
+    
     
     //    MARK: - etc
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        for i in cardButtons.indices {
-            cardButtons[i].tag = game.openCards[i].id
-        }
+        reset()
     }
 
     override func didReceiveMemoryWarning() {
