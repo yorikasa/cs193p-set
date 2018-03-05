@@ -57,7 +57,7 @@ class Set {
         //
         // Check if these 3 cards match
         else if selectedCards.count == 3 {
-            if formsSet(with: selectedCards) {
+            if doesFormSet(with: selectedCards) {
                 // three cards formed a set
                 for card in selectedCards {
                     if let cardIndex = allCards.index(where: {$0.id == card.id}) {
@@ -72,7 +72,7 @@ class Set {
         }
     }
     
-    func formsSet(with cards: [Card]) -> Bool {
+    func doesFormSet(with cards: [Card]) -> Bool {
         // If all attributes of 3 cards are either different or same, they make a set
         // e.g. figures of all cards are same (●)
         //      number  of all cards are same (1)
