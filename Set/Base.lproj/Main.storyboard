@@ -253,6 +253,18 @@
                         <outletCollection property="cardButtons" destination="Ax4-zs-bZJ" collectionClass="NSMutableArray" id="UfV-62-gxr"/>
                         <outletCollection property="cardButtons" destination="HbJ-ie-ZTi" collectionClass="NSMutableArray" id="BOW-an-l3o"/>
                         <outletCollection property="cardButtons" destination="lKZ-yp-9Xg" collectionClass="NSMutableArray" id="163-vx-1Fg"/>
+                        <outletCollection property="cardButtons" destination="ASL-J8-4CX" collectionClass="NSMutableArray" id="y6S-3j-srx"/>
+                        <outletCollection property="cardButtons" destination="uOz-eL-50O" collectionClass="NSMutableArray" id="vIs-hu-aeL"/>
+                        <outletCollection property="cardButtons" destination="iie-ep-EZN" collectionClass="NSMutableArray" id="HhR-33-J11"/>
+                        <outletCollection property="cardButtons" destination="aDq-CZ-DAG" collectionClass="NSMutableArray" id="E20-c7-fZ1"/>
+                        <outletCollection property="cardButtons" destination="dTT-Wt-YOn" collectionClass="NSMutableArray" id="hHS-1d-nlk"/>
+                        <outletCollection property="cardButtons" destination="dDH-En-gMD" collectionClass="NSMutableArray" id="nGJ-3h-wtW"/>
+                        <outletCollection property="cardButtons" destination="tBG-7y-M0j" collectionClass="NSMutableArray" id="b7Q-2a-QHH"/>
+                        <outletCollection property="cardButtons" destination="nKq-SN-M2X" collectionClass="NSMutableArray" id="nDX-l1-kBf"/>
+                        <outletCollection property="cardButtons" destination="MWP-i9-jwR" collectionClass="NSMutableArray" id="0ZB-Tb-N13"/>
+                        <outletCollection property="cardButtons" destination="4m7-cA-5lv" collectionClass="NSMutableArray" id="sDQ-ep-0tg"/>
+                        <outletCollection property="cardButtons" destination="ax5-JZ-a4G" collectionClass="NSMutableArray" id="xkp-K6-Q0k"/>
+                        <outletCollection property="cardButtons" destination="hIb-BK-Cde" collectionClass="NSMutableArray" id="gnl-vH-Uae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
