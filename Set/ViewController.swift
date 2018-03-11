@@ -18,7 +18,9 @@ class ViewController: UIViewController {
     let shading = ["solid", "striped", "open"]
     let color = [UIColor.blue, UIColor.green, UIColor.red]
     
-    lazy var game = Set(initialVisibleCards: cardButtons.count,
+    let initialVisibleCards = 12
+    
+    lazy var game = Set(initialVisibleCards: initialVisibleCards,
                         figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
     
@@ -87,10 +89,10 @@ class ViewController: UIViewController {
     }
     
     func reset() {
-        game = Set(initialVisibleCards: cardButtons.count,
+        game = Set(initialVisibleCards: initialVisibleCards,
                    figures: figures.count, number: number.count,
                    shading: shading.count, color: color.count)
-        for i in cardButtons.indices {
+        for i in 0..<initialVisibleCards {
             cardButtons[i].tag = game.openCards[i].id
             drawCardButton(cardButton: cardButtons[i])
             dehighlightCard(cardButton: cardButtons[i])
