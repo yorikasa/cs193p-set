@@ -105,12 +105,13 @@ class Set {
         return true
     }
     
-    // Return index of a random card, which is not yet open (is in card stack) from allCards
+    // Return index of a random card from allCards
+    // The card is not yet open (is in card stack) and not yet set
     func randomCardIndexFromStack() -> Int? {
         for _ in 1...cardCount {
             let randomCardId = Int(arc4random_uniform(UInt32(cardCount)))
             if let cardIndex = allCards.index(where: {$0.id == randomCardId}) {
-                if allCards[cardIndex].isOpen == false {
+                if allCards[cardIndex].isOpen == false, allCards[cardIndex].isSet == false {
                     return cardIndex
                 }
             }
