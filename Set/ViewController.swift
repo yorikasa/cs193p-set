@@ -45,6 +45,8 @@ class ViewController: UIViewController {
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
         
+        updateCardsView()
+        
         for card in game.allCards {
             if let cardButton = cardButtons.filter({$0.tag == card.id}).first {
                 if card.isSelected {
@@ -96,6 +98,17 @@ class ViewController: UIViewController {
             cardButtons[i].tag = game.openCards[i].id
             drawCardButton(cardButton: cardButtons[i])
             dehighlightCard(cardButton: cardButtons[i])
+        }
+    }
+    
+    func updateCardsView() {
+        for i in 0..<game.openCards.count {
+            // FIXME: it should not refresh all open cards
+            // because `openCards` array would not always sorted
+            // that is, [10, 22, 24, 54, 71] might change to [8, 10, 24, 71, 76]
+            // so every ID should be checked (is it practical?)
+            cardButtons[i].tag = game.openCards[i].id
+            drawCardButton(cardButton: cardButtons[i])
         }
     }
     
