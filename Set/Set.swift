@@ -60,6 +60,13 @@ class Set {
                 for card in selectedCards {
                     if let cardIndex = allCards.index(where: {$0.id == card.id}) {
                         allCards[cardIndex].isSet = true
+                        allCards[cardIndex].isOpen = false
+                    }
+                }
+                // Deal 3 new cards
+                for _ in 1...3 {
+                    if let random = randomCardIndexFromStack() {
+                        allCards[random].isOpen = true
                     }
                 }
             }
