@@ -22,8 +22,6 @@ class Set {
     }
     
     // game rules
-    let initialVisibleCards: Int = 12
-    
     var allCards: [Card]
     var openCards: [Card] {
         return allCards.filter({$0.isOpen == true})
