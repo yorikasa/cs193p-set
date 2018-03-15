@@ -102,13 +102,28 @@ class ViewController: UIViewController {
     }
     
     func updateCardsView() {
+        var cardButtonIndicesToReplace: [Int] = []
+        var newlyOpenedCardTags: [Int] = []
+        
+        // Find out which cardButton indices are going to be replaced
+        // and which cards (tags) are newly opened.
+        // Then replace the cards' tags which have that indices with newly opened cards' tags.
+        
+        // TODO: if there are no cards to replace (empty deck), what will happen
+        for card in game.openCards {
+            if !cardButtons.contains(where: {$0.tag == card.id}) {
+                newlyOpenedCardTags.append(card.id)
+            }
+        }
         for i in 0..<game.openCards.count {
-            // FIXME: it should not refresh all open cards
-            // because `openCards` array would not always sorted
-            // that is, [10, 22, 24, 54, 71] might change to [8, 10, 24, 71, 76]
-            // so every ID should be checked (is it practical?)
-            cardButtons[i].tag = game.openCards[i].id
-            drawCardButton(cardButton: cardButtons[i])
+            if !game.openCards.contains(where: {$0.id == cardButtons[i].tag}) {
+                cardButtonIndicesToReplace.append(i)
+            }
+        }
+        
+        for i in 0..<cardButtonIndicesToReplace.count {
+            cardButtons[cardButtonIndicesToReplace[i]].tag = newlyOpenedCardTags[i]
+            drawCardButton(cardButton: cardButtons[cardButtonIndicesToReplace[i]])
         }
     }
     
