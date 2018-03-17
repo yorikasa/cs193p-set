@@ -43,14 +43,14 @@ class ViewController: UIViewController {
     // UI Elements (View) has its attributes and Model (Cards struct) has its attributes.
     // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
-        game.selectCard(at: sender.tag)
-        
         updateCardsView()
+        
+        game.selectCard(at: sender.tag)
         
         for card in game.allCards {
             if let cardButton = cardButtons.filter({$0.tag == card.id}).first {
                 if card.isSelected {
-                    highlightCard(cardButton: cardButton)
+                    highlightCard(cardButton: cardButton, state: card.isSet)
                 } else {
                     dehighlightCard(cardButton: cardButton)
                 }
@@ -80,9 +80,13 @@ class ViewController: UIViewController {
         cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
     }
     
-    func highlightCard(cardButton: UIButton) {
+    func highlightCard(cardButton: UIButton, state matched: Bool) {
         cardButton.layer.borderWidth = 2.0
-        cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        if matched {
+            cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        } else {
+            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        }
     }
     
     func dehighlightCard(cardButton: UIButton) {
