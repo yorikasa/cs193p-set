@@ -65,15 +65,22 @@ class Set {
                 }
                 // Deal 3 new cards
                 for _ in 1...3 {
-                    if let random = randomCardIndexFromStack() {
-                        allCards[random].isOpen = true
-                    }
+                    _ = openCardFromDeck()
                 }
             }
         }
         // This is the first/2nd card selected
         else {
             // Do nothing
+        }
+    }
+    
+    func openCardFromDeck() -> Card? {
+        if let random = randomCardIndexFromStack() {
+            allCards[random].isOpen = true
+            return allCards[random]
+        } else {
+            return nil
         }
     }
     

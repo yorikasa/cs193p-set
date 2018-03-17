@@ -62,6 +62,14 @@ class ViewController: UIViewController {
         reset()
     }
     
+    @IBAction func dealCards(_ sender: UIButton) {
+        for _ in 1...3 {
+            _ = game.openCardFromDeck()
+        }
+        updateCardsView()
+    }
+    
+    
     // MARK: - Functions
     func drawCardButton(cardButton : UIButton) {
         // TODO: Remove Force unwrapping (!)
