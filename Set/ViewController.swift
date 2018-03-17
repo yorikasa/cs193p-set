@@ -122,12 +122,10 @@ class ViewController: UIViewController {
         // Then replace the cards' tags which have that indices with newly opened cards' tags.
         
         // TODO: if there are no cards to replace (empty deck), what will happen
-        for card in game.openCards {
-            if !cardButtons.contains(where: {$0.tag == card.id}) {
-                newlyOpenedCardTags.append(card.id)
-            }
-        }
         for i in 0..<game.openCards.count {
+            if !cardButtons.contains(where: {$0.tag == game.openCards[i].id}) {
+                newlyOpenedCardTags.append(game.openCards[i].id)
+            }
             if !game.openCards.contains(where: {$0.id == cardButtons[i].tag}) {
                 cardButtonIndicesToReplace.append(i)
             }
