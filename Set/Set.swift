@@ -17,6 +17,8 @@ class Set {
     let shadingNum: Int
     let colorNum: Int
     
+    let maxOpenedCards: Int
+    
     var cardCount: Int {
         return figuresNum * numberNum * shadingNum * colorNum
     }
@@ -136,13 +138,14 @@ class Set {
         return nil
     }
     
-    init(initialVisibleCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
+    init(initialVisibleCards: Int, maxOpenedCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
         figuresNum = figures
         numberNum = number
         shadingNum = shading
         colorNum = color
+        self.maxOpenedCards = maxOpenedCards
         
         // Initialize all 81 cards
         allCards = []

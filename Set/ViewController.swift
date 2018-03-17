@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     let initialVisibleCards = 12
     
     lazy var game = Set(initialVisibleCards: initialVisibleCards,
+                        maxOpenedCards: cardButtons.count,
                         figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
     
@@ -104,6 +105,7 @@ class ViewController: UIViewController {
     
     func reset() {
         game = Set(initialVisibleCards: initialVisibleCards,
+                   maxOpenedCards: cardButtons.count,
                    figures: figures.count, number: number.count,
                    shading: shading.count, color: color.count)
         for i in 0..<initialVisibleCards {
