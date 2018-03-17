@@ -77,13 +77,23 @@ class Set {
         }
     }
     
+    func open(_ card: Card) -> Card? {
+        if openCards.count < maxOpenedCards {
+            if let index = allCards.index(of: card) {
+                allCards[index].isOpen = true
+                return card
+            }
+        }
+        return nil
+    }
+    
     func openCardFromDeck() -> Card? {
         if let random = randomCardIndexFromStack() {
-            allCards[random].isOpen = true
-            return allCards[random]
-        } else {
-            return nil
+            if let card = open(allCards[random]) {
+                return card
+            }
         }
+        return nil
     }
     
     func doesFormSet(with cards: [Card]) -> Bool {
