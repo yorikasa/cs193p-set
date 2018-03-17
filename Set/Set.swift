@@ -51,7 +51,7 @@ class Set {
                 allCards[cardIndex].isSelected = true
             }
         }
-        // This selection adds the 3rd card to the selection
+        // New card adds the 3rd card to the selection
         //
         // Check if these 3 cards match
         else if selectedCards.count == 3 {
