@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Card {
+struct Card: Equatable {
     let id: Int
     
     let figureId: Int
@@ -38,5 +38,9 @@ struct Card {
         self.isOpen = false
         self.isSelected = false
         self.isSet = false
+    }
+    
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.id == rhs.id
     }
 }
