@@ -148,6 +148,10 @@ class Set {
         return nil
     }
     
+    func randomInt(within range: CountableClosedRange<Int>) -> Int{
+        return Int(arc4random_uniform(UInt32(range.upperBound))) + range.lowerBound
+    }
+    
     init(initialVisibleCards: Int, maxOpenedCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
