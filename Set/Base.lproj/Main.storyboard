@@ -280,6 +280,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
                         <outletCollection property="cardButtons" destination="3vA-Nm-xhH" collectionClass="NSMutableArray" id="wFV-85-yMi"/>
                         <outletCollection property="cardButtons" destination="9RW-VU-EyW" collectionClass="NSMutableArray" id="fku-Tx-bV6"/>
                         <outletCollection property="cardButtons" destination="46i-H1-74A" collectionClass="NSMutableArray" id="eE1-fC-2vM"/>

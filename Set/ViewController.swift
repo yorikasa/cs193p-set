@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     //    MARK: - Outlets
 
     @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet weak var dealCardsButton: UIButton!
     
     //    MARK: - Actions
     
