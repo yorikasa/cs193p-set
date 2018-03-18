@@ -116,6 +116,9 @@ class ViewController: UIViewController {
     }
     
     func reset() {
+        for cardButton in cardButtons {
+            hideCard(of: cardButton)
+        }
         game = Set(initialVisibleCards: initialVisibleCards,
                    maxOpenedCards: cardButtons.count,
                    figures: figures.count, number: number.count,
