@@ -104,6 +104,10 @@ class ViewController: UIViewController {
         cardButton.layer.borderColor = nil
     }
     
+    func hideCard(cardButton: UIButton) {
+        cardButton.layer.opacity = 0
+    }
+    
     func reset() {
         game = Set(initialVisibleCards: initialVisibleCards,
                    maxOpenedCards: cardButtons.count,
