@@ -109,6 +109,12 @@ class ViewController: UIViewController {
         cardButton.tag = 0
     }
     
+    func openCard(of cardButton: UIButton, withTag tag: Int) {
+        cardButton.layer.opacity = 1.0
+        cardButton.tag = tag
+        drawCardButton(cardButton: cardButton)
+    }
+    
     func reset() {
         game = Set(initialVisibleCards: initialVisibleCards,
                    maxOpenedCards: cardButtons.count,
