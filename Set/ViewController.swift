@@ -104,8 +104,9 @@ class ViewController: UIViewController {
         cardButton.layer.borderColor = nil
     }
     
-    func hideCard(cardButton: UIButton) {
+    func hideCard(of cardButton: UIButton) {
         cardButton.layer.opacity = 0
+        cardButton.tag = 0
     }
     
     func reset() {
