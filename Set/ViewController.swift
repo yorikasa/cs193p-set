@@ -149,6 +149,16 @@ class ViewController: UIViewController {
             cardButtons[cardButtonIndicesToReplace[i]].tag = newlyOpenedCardTags[i]
             drawCardButton(cardButton: cardButtons[cardButtonIndicesToReplace[i]])
         }
+        
+        for cardButton in cardButtons {
+            let cards = game.allCards.filter({$0.id == cardButton.tag})
+            if cards.count == 1 {
+                let card = cards[0]
+                if card.isOpen == false {
+                    hideCard(of: cardButton)
+                }
+            }
+        }
     }
     
     
