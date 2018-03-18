@@ -121,8 +121,7 @@ class ViewController: UIViewController {
                    figures: figures.count, number: number.count,
                    shading: shading.count, color: color.count)
         for i in 0..<initialVisibleCards {
-            cardButtons[i].tag = game.openCards[i].id
-            drawCardButton(cardButton: cardButtons[i])
+            openCard(of: cardButtons[i], withTag: game.openCards[i].id)
             dehighlightCard(cardButton: cardButtons[i])
         }
     }
@@ -146,8 +145,7 @@ class ViewController: UIViewController {
         // TODO: if there are no cards to replace (empty deck), what will happen
         // workaround
         for i in 0..<newlyOpenedCardTags.count {
-            cardButtons[cardButtonIndicesToReplace[i]].tag = newlyOpenedCardTags[i]
-            drawCardButton(cardButton: cardButtons[cardButtonIndicesToReplace[i]])
+            openCard(of: cardButtons[cardButtonIndicesToReplace[i]], withTag: newlyOpenedCardTags[i])
         }
         
         for cardButton in cardButtons {
