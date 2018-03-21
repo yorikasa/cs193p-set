@@ -32,18 +32,9 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealCardsButton: UIButton!
     
+    
     //    MARK: - Actions
     
-    
-    // Battle of how UI (view) and Model come together...
-    // I, first, was going to compare sender with cards like:
-    //
-    //     if game.cards.contains(where: sender) { ... }
-    //
-    // but it I happened to know it won't work because Card and sender (UIButton) aren't comparable.
-    // or I should say I should make connection between model and view HERE.
-    // UI Elements (View) has its attributes and Model (Cards struct) has its attributes.
-    // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
 
@@ -68,6 +59,7 @@ class ViewController: UIViewController {
     
     
     // MARK: - Functions
+    
     func drawCardButton(cardButton : UIButton) {
         if let card = card(of: cardButton) {
             var attributes: [NSAttributedStringKey : Any] = [
