@@ -69,25 +69,25 @@ class ViewController: UIViewController {
     
     // MARK: - Functions
     func drawCardButton(cardButton : UIButton) {
-        // TODO: Remove Force unwrapping (!)
-        let card = game.allCards.filter({$0.id == cardButton.tag}).first!
-        var attributes: [NSAttributedStringKey : Any] = [
-            .foregroundColor: color[card.colorId]
-        ]
-        if card.shadingId == shading.index(of: "open") {
-            attributes[.strokeColor] = color[card.colorId]
-            attributes[.strokeWidth] = 10.0
-        } else if card.shadingId == shading.index(of: "striped") {
-            attributes[.underlineColor] = color[card.colorId]
-            attributes[.underlineStyle] = NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.styleSingle.rawValue
+        if let card = card(of: cardButton) {
+            var attributes: [NSAttributedStringKey : Any] = [
+                .foregroundColor: color[card.colorId]
+            ]
+            if card.shadingId == shading.index(of: "open") {
+                attributes[.strokeColor] = color[card.colorId]
+                attributes[.strokeWidth] = 10.0
+            } else if card.shadingId == shading.index(of: "striped") {
+                attributes[.underlineColor] = color[card.colorId]
+                attributes[.underlineStyle] = NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.styleSingle.rawValue
+            }
+            let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
+            cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
         }
-        let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
-        cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
     }
     
     // de/highlight the card button depends on the corresponding card
     func highlightCard(cardButton: UIButton) {
-        if let card = game.allCards.filter({$0.id == cardButton.tag}).first {
+        if let card = card(of: cardButton) {
             if card.isSelected {
                 cardButton.layer.borderWidth = 2.0
                 if card.isSet {
@@ -160,9 +160,7 @@ class ViewController: UIViewController {
         }
         
         for cardButton in cardButtons {
-            let cards = game.allCards.filter({$0.id == cardButton.tag})
-            if cards.count == 1 {
-                let card = cards[0]
+            if let card = card(of: cardButton) {
                 if card.isOpen == false {
                     hideCard(of: cardButton)
                 }
