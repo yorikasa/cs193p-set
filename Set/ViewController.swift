@@ -25,6 +25,9 @@ class ViewController: UIViewController {
                         figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
     
+    var openedCardButtons: [UIButton]? {
+        return cardButtons.filter({$0.tag != 0})
+    }
 
     
     //    MARK: - Outlets
