@@ -71,6 +71,7 @@ class Set {
         }
     }
     
+    // Oepn specified card if there's enough space to open
     func open(_ card: Card) -> Card? {
         if openCards.count < maxOpenedCards {
             if let index = allCards.index(of: card) {
@@ -81,6 +82,7 @@ class Set {
         return nil
     }
     
+    // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
         if let random = randomCardIndexFromStack() {
             if let card = open(allCards[random]) {
@@ -160,12 +162,9 @@ class Set {
                 }
             }
         }
-        
         // Open <initialVisibleCards> cards randomly
         for _ in 1...initialVisibleCards {
-            if let random = randomCardIndexFromStack() {
-                allCards[random].isOpen = true
-            }
+            _ = openCardFromDeck()
         }
     }
 }
