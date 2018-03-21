@@ -102,6 +102,16 @@ class ViewController: UIViewController {
         }
     }
     
+    // return a corresponding card object from a card button
+    func card(of cardButton: UIButton) -> Card? {
+        let cards = game.allCards.filter({$0.id == cardButton.tag})
+        if cards.count == 1 {
+            return cards.first
+        } else {
+            return nil
+        }
+    }
+    
     func hideCard(of cardButton: UIButton) {
         cardButton.layer.opacity = 0
         cardButton.tag = 0
@@ -181,5 +191,6 @@ class ViewController: UIViewController {
 
 
 }
+
 
 
