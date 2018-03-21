@@ -45,19 +45,13 @@ class ViewController: UIViewController {
     // UI Elements (View) has its attributes and Model (Cards struct) has its attributes.
     // But there's no connection between them. I have to connect them somewhere, or, here.
     @IBAction func touchCard(_ sender: UIButton) {
-        updateCardsView()
-        
         game.selectCard(at: sender.tag)
-        
-        for card in game.allCards {
-            if let cardButton = cardButtons.filter({$0.tag == card.id}).first {
-                if card.isSelected {
-                    highlightCard(cardButton: cardButton, state: card.isSet)
-                } else {
-                    dehighlightCard(cardButton: cardButton)
-                }
-            }
+
+        for cardButton in cardButtons {
+            highlightCard(cardButton: cardButton)
         }
+        
+        updateCardsView()
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
@@ -91,18 +85,21 @@ class ViewController: UIViewController {
         cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
     }
     
-    func highlightCard(cardButton: UIButton, state matched: Bool) {
-        cardButton.layer.borderWidth = 2.0
-        if matched {
-            cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
-        } else {
-            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    // de/highlight the card button depends on the corresponding card
+    func highlightCard(cardButton: UIButton) {
+        if let card = game.allCards.filter({$0.id == cardButton.tag}).first {
+            if card.isSelected {
+                cardButton.layer.borderWidth = 2.0
+                if card.isSet {
+                    cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+                } else {
+                    cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                }
+            } else {
+                cardButton.layer.borderWidth = 0
+                cardButton.layer.borderColor = nil
+            }
         }
-    }
-    
-    func dehighlightCard(cardButton: UIButton) {
-        cardButton.layer.borderWidth = 0
-        cardButton.layer.borderColor = nil
     }
     
     func hideCard(of cardButton: UIButton) {
@@ -126,7 +123,7 @@ class ViewController: UIViewController {
                    shading: shading.count, color: color.count)
         for i in 0..<initialVisibleCards {
             openCard(of: cardButtons[i], withTag: game.openCards[i].id)
-            dehighlightCard(cardButton: cardButtons[i])
+            highlightCard(cardButton: cardButtons[i])
         }
     }
     
