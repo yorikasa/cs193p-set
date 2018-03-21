@@ -11,19 +11,10 @@ import Foundation
 class Set {
     //    MARK: - Variables
     
-    // card variations
-    let figuresNum: Int
-    let numberNum: Int
-    let shadingNum: Int
-    let colorNum: Int
-    
+    // how many cards can be opened (how large your table is)
     let maxOpenedCards: Int
     
-    var cardCount: Int {
-        return figuresNum * numberNum * shadingNum * colorNum
-    }
-    
-    // game rules
+    // cards
     var allCards: [Card]
     var openCards: [Card] {
         return allCards.filter({$0.isOpen == true})
@@ -156,18 +147,14 @@ class Set {
     init(initialVisibleCards: Int, maxOpenedCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
-        figuresNum = figures
-        numberNum = number
-        shadingNum = shading
-        colorNum = color
         self.maxOpenedCards = maxOpenedCards
         
         // Initialize all 81 cards
         allCards = []
-        for f in 0..<figuresNum {
-            for n in 0..<numberNum {
-                for s in 0..<shadingNum {
-                    for c in 0..<colorNum {
+        for f in 0..<figures {
+            for n in 0..<number {
+                for s in 0..<shading {
+                    for c in 0..<color {
                         allCards.append(Card(figure: f, number: n, shading: s, color: c))
                     }
                 }
