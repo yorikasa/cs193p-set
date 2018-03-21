@@ -37,11 +37,6 @@ class ViewController: UIViewController {
     
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
-
-        for cardButton in cardButtons {
-            highlightCard(cardButton: cardButton)
-        }
-        
         updateCardsView()
     }
     
@@ -153,10 +148,12 @@ class ViewController: UIViewController {
         
         for cardButton in cardButtons {
             if let card = card(of: cardButton) {
+                // hide matched cards when there's no cards to deal from the deck
                 if card.isOpen == false {
                     hideCard(of: cardButton)
                 }
             }
+            highlightCard(cardButton: cardButton)
         }
         if (game.cardsInDeck.count == 0) || (game.openCards.count == cardButtons.count) {
             dealCardsButton.isEnabled = false
