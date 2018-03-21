@@ -148,6 +148,7 @@ class Set {
         }
     }
     
+    // randomInt(10...100) returns random value from 10 to 100 (10 and 100 both included)
     func randomInt(within range: CountableClosedRange<Int>) -> Int{
         return Int(arc4random_uniform(UInt32(range.upperBound))) + range.lowerBound
     }
