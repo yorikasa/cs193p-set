@@ -62,6 +62,7 @@ class ViewController: UIViewController {
     
     @IBAction func startNewGame(_ sender: UIButton) {
         reset()
+        updateCardsView()
     }
     
     @IBAction func dealCards(_ sender: UIButton) {
@@ -159,6 +160,11 @@ class ViewController: UIViewController {
                     hideCard(of: cardButton)
                 }
             }
+        }
+        if (game.cardsInDeck.count == 0) || (game.openCards.count == cardButtons.count) {
+            dealCardsButton.isEnabled = false
+        } else {
+            dealCardsButton.isEnabled = true
         }
     }
     
