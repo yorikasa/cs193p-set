@@ -31,6 +31,9 @@ class Set {
     var selectedCards: [Card] {
         return allCards.filter({$0.isSelected == true})
     }
+    var cardsInDeck: [Card] {
+        return allCards.filter({!$0.isOpen && !$0.isSet })
+    }
     
     //    MARK: - Methods
     
@@ -137,10 +140,9 @@ class Set {
     // Return index of a random card from allCards
     // The card is not yet open (is in card stack) and not yet set
     func randomCardIndexFromStack() -> Int? {
-        let availableCards = allCards.filter({!$0.isOpen && !$0.isSet })
-        if availableCards.count > 0 {
-            let randomId = randomInt(within: 0...availableCards.count)
-            return allCards.index(of: availableCards[randomId])
+        if cardsInDeck.count > 0 {
+            let randomId = randomInt(within: 0...cardsInDeck.count)
+            return allCards.index(of: cardsInDeck[randomId])
         } else {
             return nil
         }
