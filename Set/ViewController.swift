@@ -49,8 +49,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dealCards(_ sender: UIButton) {
-        for _ in 1...3 {
-            _ = game.openCardFromDeck()
+        if !game.replaceCards() {
+            for _ in 1...3 {
+                _ = game.openCardFromDeck()
+            }
         }
         updateCardsView()
     }

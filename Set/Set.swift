@@ -35,14 +35,7 @@ class Set {
             allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
         }
         
-        // if there are cards to be replaced (matched in a previous selection)
-        // close these cards and replace them with new cards from the deck
-        for cardIndex in allCards.indices {
-            if allCards[cardIndex].isSet == true, allCards[cardIndex].isOpen == true{
-                allCards[cardIndex].isOpen = false
-                _ = openCardFromDeck()
-            }
-        }
+        _ = replaceCards()
         
         // New card selected after 3 cards were un/matched
         // (already 3 cards are selected)
@@ -73,6 +66,20 @@ class Set {
         else {
             // Do nothing
         }
+    }
+    
+    // if there are cards to be replaced (matched in a previous selection)
+    // close these cards and replace them with new cards from the deck
+    func replaceCards() -> Bool{
+        var isReplaced = false
+        for cardIndex in allCards.indices {
+            if allCards[cardIndex].isSet == true, allCards[cardIndex].isOpen == true{
+                allCards[cardIndex].isOpen = false
+                _ = openCardFromDeck()
+                isReplaced = true
+            }
+        }
+        return isReplaced
     }
     
     // Oepn specified card if there's enough space to open
