@@ -35,6 +35,15 @@ class Set {
             allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
         }
         
+        // if there are cards to be replaced (matched in a previous selection)
+        // close these cards and replace them with new cards from the deck
+        for cardIndex in allCards.indices {
+            if allCards[cardIndex].isSet == true, allCards[cardIndex].isOpen == true{
+                allCards[cardIndex].isOpen = false
+                _ = openCardFromDeck()
+            }
+        }
+        
         // New card selected after 3 cards were un/matched
         // (already 3 cards are selected)
         //
@@ -56,12 +65,7 @@ class Set {
                 for card in selectedCards {
                     if let cardIndex = allCards.index(where: {$0.id == card.id}) {
                         allCards[cardIndex].isSet = true
-                        allCards[cardIndex].isOpen = false
                     }
-                }
-                // Deal 3 new cards
-                for _ in 1...3 {
-                    _ = openCardFromDeck()
                 }
             }
         }
