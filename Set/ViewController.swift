@@ -74,6 +74,8 @@ class ViewController: UIViewController {
             }
             let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
             cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
+        } else {
+            cardButton.setAttributedTitle(nil, for: UIControlState.normal)
         }
     }
     
@@ -118,6 +120,7 @@ class ViewController: UIViewController {
     func reset() {
         for cardButton in cardButtons {
             hideCard(of: cardButton)
+            drawCardButton(cardButton: cardButton)
         }
         game = Set(initialVisibleCards: initialVisibleCards,
                    maxOpenedCards: cardButtons.count,
