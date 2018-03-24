@@ -32,7 +32,10 @@ class Set {
         // If already selected, then deselect (true -> false)
         // If not selected, then select (false -> true)
         if let cardIndex = allCards.index(where: {$0.id == id}) {
-            allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+            // only if the card isn't already matched
+            if !allCards[cardIndex].isSet {
+                allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+            }
         }
         
         _ = replaceCards()
