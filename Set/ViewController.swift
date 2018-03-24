@@ -163,7 +163,10 @@ class ViewController: UIViewController {
             }
             highlightCard(cardButton: cardButton)
         }
-        if (game.cardsInDeck.count == 0) || (game.openCards.count == cardButtons.count) {
+        // when cards matched these cards are keep opened until a next card is selected
+        // so exclude these already matched but open cards to deal new cards
+        let availableCards = game.allCards.filter({$0.isOpen == true && $0.isSet == false})
+        if (game.cardsInDeck.count == 0) || (availableCards.count == cardButtons.count) {
             dealCardsButton.isEnabled = false
         } else {
             dealCardsButton.isEnabled = true
