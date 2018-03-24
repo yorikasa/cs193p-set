@@ -14,6 +14,8 @@ class Set {
     // how many cards can be opened (how large your table is)
     let maxOpenedCards: Int
     
+    var score: Int
+    
     // cards
     var allCards: [Card]
     var openCards: [Card] {
@@ -62,6 +64,9 @@ class Set {
                         allCards[cardIndex].isSet = true
                     }
                 }
+                score += 3
+            } else {
+                score -= 3
             }
         }
         // This is the first/2nd card selected
@@ -107,7 +112,7 @@ class Set {
     
     func doesFormSet(with cards: [Card]) -> Bool {
         // for the test purpose
-        return true
+        //return true
         
         // If all attributes of 3 cards are either different or same, they make a set
         // e.g. figures of all cards are same (●)
@@ -163,6 +168,7 @@ class Set {
         Card.idGenerator = 0
         
         self.maxOpenedCards = maxOpenedCards
+        self.score = 0
         
         // Initialize all 81 cards
         allCards = []

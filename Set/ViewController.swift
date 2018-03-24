@@ -19,6 +19,11 @@ class ViewController: UIViewController {
     let color = [UIColor.blue, UIColor.green, UIColor.red]
     
     let initialVisibleCards = 12
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "\(score)"
+        }
+    }
     
     lazy var game = Set(initialVisibleCards: initialVisibleCards,
                         maxOpenedCards: cardButtons.count,
@@ -131,6 +136,7 @@ class ViewController: UIViewController {
             openCard(of: cardButtons[i], withTag: game.openCards[i].id)
             highlightCard(cardButton: cardButtons[i])
         }
+        score = game.score
     }
     
     func updateCardsView() {
@@ -172,6 +178,7 @@ class ViewController: UIViewController {
         } else {
             dealCardsButton.isEnabled = true
         }
+        score = game.score
     }
     
     
