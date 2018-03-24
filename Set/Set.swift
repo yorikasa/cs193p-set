@@ -29,16 +29,15 @@ class Set {
     //    MARK: - Methods
     
     func selectCard(at id: Int) {
-        // If already selected, then deselect (true -> false)
-        // If not selected, then select (false -> true)
-        if let cardIndex = allCards.index(where: {$0.id == id}) {
-            // only if the card isn't already matched
-            if !allCards[cardIndex].isSet {
-                allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
-            }
+        // if there's any card to replace, then replace them and do nothing
+        if replaceCards() {
+            return
         }
-        
-        _ = replaceCards()
+        if let cardIndex = allCards.index(where: {$0.id == id}) {
+            // If already selected, then deselect (true -> false)
+            // If not selected, then select (false -> true)
+            allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+        }
         
         // New card selected after 3 cards were un/matched
         // (already 3 cards are selected)
