@@ -34,6 +34,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealCardsButton: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     
     //    MARK: - Actions

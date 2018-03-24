@@ -258,15 +258,27 @@
                                             <action selector="startNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nbu-hQ-CVz"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2z-Se-PbO">
+                                        <rect key="frame" x="166" y="0.0" width="10.333333333333343" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="tF0-j4-oR9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="pIf-SZ-b2J" firstAttribute="top" secondItem="gph-eW-a8K" secondAttribute="top" id="06L-B3-eXC"/>
                                     <constraint firstAttribute="bottom" secondItem="pIf-SZ-b2J" secondAttribute="bottom" id="5c0-x9-26I"/>
+                                    <constraint firstItem="A2z-Se-PbO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ik2-5s-wFY" secondAttribute="trailing" constant="10" id="H5a-Ac-2re"/>
                                     <constraint firstItem="Ik2-5s-wFY" firstAttribute="top" secondItem="gph-eW-a8K" secondAttribute="top" id="Tec-4X-G8g"/>
-                                    <constraint firstItem="pIf-SZ-b2J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ik2-5s-wFY" secondAttribute="trailing" constant="10" id="aYH-d0-NqJ"/>
                                     <constraint firstItem="Ik2-5s-wFY" firstAttribute="leading" secondItem="gph-eW-a8K" secondAttribute="leading" id="bkz-L0-oZS"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ik2-5s-wFY" secondAttribute="bottom" id="u1r-UT-A8E"/>
+                                    <constraint firstItem="A2z-Se-PbO" firstAttribute="top" secondItem="gph-eW-a8K" secondAttribute="top" id="cog-2M-b0h"/>
+                                    <constraint firstItem="A2z-Se-PbO" firstAttribute="centerX" secondItem="gph-eW-a8K" secondAttribute="centerX" id="eCG-DU-jnn"/>
+                                    <constraint firstItem="pIf-SZ-b2J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A2z-Se-PbO" secondAttribute="trailing" constant="10" id="toZ-KY-4St"/>
                                     <constraint firstAttribute="trailing" secondItem="pIf-SZ-b2J" secondAttribute="trailing" id="ugl-3g-4fg"/>
+                                    <constraint firstAttribute="bottom" secondItem="A2z-Se-PbO" secondAttribute="bottom" id="vdi-pZ-7n4"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -298,6 +310,7 @@
                     </view>
                     <connections>
                         <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
+                        <outlet property="scoreLabel" destination="A2z-Se-PbO" id="RqH-zO-Qas"/>
                         <outletCollection property="cardButtons" destination="3vA-Nm-xhH" collectionClass="NSMutableArray" id="wFV-85-yMi"/>
                         <outletCollection property="cardButtons" destination="9RW-VU-EyW" collectionClass="NSMutableArray" id="fku-Tx-bV6"/>
                         <outletCollection property="cardButtons" destination="46i-H1-74A" collectionClass="NSMutableArray" id="eE1-fC-2vM"/>
