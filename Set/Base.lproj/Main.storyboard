@@ -239,11 +239,11 @@
                                 <rect key="frame" x="16" y="740" width="343" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik2-5s-wFY">
-                                        <rect key="frame" x="0.0" y="0.0" width="141" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="89" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fWs-2Z-VtP"/>
                                         </constraints>
-                                        <state key="normal" title="+ Deal 3 More Cards"/>
+                                        <state key="normal" title="Deal 3 Cards"/>
                                         <connections>
                                             <action selector="dealCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xe6-QT-vh3"/>
                                         </connections>
