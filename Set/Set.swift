@@ -143,16 +143,6 @@ class Set {
         return true
     }
     
-    // Return index of a random card from allCards
-    // The card is not yet open (is in card stack) and not yet set
-    func randomCardIndexFromStack() -> Int? {
-        if cardsInDeck.count > 0 {
-            let randomId = randomInt(within: 0...cardsInDeck.count)
-            return allCards.index(of: cardsInDeck[randomId])
-        } else {
-            return nil
-        }
-    }
     
     // randomInt(10...100) returns random value from 10 to 100 (10 and 100 both included)
     func randomInt(within range: CountableClosedRange<Int>) -> Int{
