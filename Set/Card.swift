@@ -16,10 +16,6 @@ struct Card: Equatable {
     let shadingId: Int
     let colorId: Int
     
-    var isOpen: Bool
-    var isSelected: Bool
-    var isSet: Bool
-    
     static var idGenerator = 0
     
     static func createId() -> Int {
@@ -34,10 +30,6 @@ struct Card: Equatable {
         self.numberId = number
         self.shadingId = shading
         self.colorId = color
-        
-        self.isOpen = false
-        self.isSelected = false
-        self.isSet = false
     }
     
     static func ==(lhs: Card, rhs: Card) -> Bool {
