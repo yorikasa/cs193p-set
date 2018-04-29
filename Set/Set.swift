@@ -10,14 +10,9 @@ import Foundation
 
 class Set {
     //    MARK: - Variables
-    
-    // how many cards can be opened (how large your table is)
-    let maxOpenedCards: Int
-    
     var score: Int
     
     // cards
-    var allCards: [Card] = []
     var openCards: [Card] = []
     var selectedCards: [Card] = []
     var matchedCards: [Card] = []
@@ -87,12 +82,10 @@ class Set {
     // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
         if cardsInDeck.count > 0 {
-            if openCards.count < maxOpenedCards {
-                let randomIndex = randomInt(within: 0...cardsInDeck.count)
-                openCards.append(cardsInDeck[randomIndex])
-                cardsInDeck.remove(at: randomIndex)
-                return openCards.last
-            }
+            let randomIndex = randomInt(within: 0...cardsInDeck.count)
+            openCards.append(cardsInDeck[randomIndex])
+            cardsInDeck.remove(at: randomIndex)
+            return openCards.last
         }
         return nil
     }
@@ -141,10 +134,9 @@ class Set {
         return Int(arc4random_uniform(UInt32(range.upperBound))) + range.lowerBound
     }
     
-    init(initialVisibleCards: Int, maxOpenedCards: Int, figures: Int, number: Int, shading: Int, color: Int) {
+    init(figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
-        self.maxOpenedCards = maxOpenedCards
         self.score = 0
         
         // Initialize all 81 cards
@@ -153,15 +145,10 @@ class Set {
                 for s in 0..<shading {
                     for c in 0..<color {
                         let card = Card(figure: f, number: n, shading: s, color: c)
-                        allCards.append(card)
                         cardsInDeck.append(card)
                     }
                 }
             }
-        }
-        // Open <initialVisibleCards> cards randomly
-        for _ in 1...initialVisibleCards {
-            _ = openCardFromDeck()
         }
     }
 }

@@ -25,9 +25,7 @@ class ViewController: UIViewController {
         }
     }
     
-    lazy var game = Set(initialVisibleCards: initialVisibleCards,
-                        maxOpenedCards: cardButtons.count,
-                        figures: figures.count, number: number.count,
+    lazy var game = Set(figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
     
     var openedCardButtons: [UIButton]? {
@@ -121,10 +119,14 @@ class ViewController: UIViewController {
         cardButton.tag = 0
     }
     
-    func openCard(of cardButton: UIButton, withTag tag: Int) {
-        cardButton.layer.opacity = 1.0
-        cardButton.tag = tag
-        drawCardButton(cardButton: cardButton)
+    func openCard(of cardButton: UIButton) {
+        if game.openCards.count < cardButtons.count {
+            if let card = game.openCardFromDeck() {
+                cardButton.layer.opacity = 1.0
+                cardButton.tag = card.id
+                drawCardButton(cardButton: cardButton)
+            }
+        }
     }
     
     func reset() {
@@ -132,12 +134,10 @@ class ViewController: UIViewController {
             hideCard(of: cardButton)
             drawCardButton(cardButton: cardButton)
         }
-        game = Set(initialVisibleCards: initialVisibleCards,
-                   maxOpenedCards: cardButtons.count,
-                   figures: figures.count, number: number.count,
+        game = Set(figures: figures.count, number: number.count,
                    shading: shading.count, color: color.count)
         for i in 0..<initialVisibleCards {
-            openCard(of: cardButtons[i], withTag: game.openCards[i].id)
+            openCard(of: cardButtons[i])
             highlightCard(cardButton: cardButtons[i])
         }
         score = game.score
