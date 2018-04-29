@@ -18,15 +18,9 @@ class Set {
     
     // cards
     var allCards: [Card]
-    var openCards: [Card] {
-        return allCards.filter({$0.isOpen == true})
-    }
-    var selectedCards: [Card] {
-        return allCards.filter({$0.isSelected == true})
-    }
-    var cardsInDeck: [Card] {
-        return allCards.filter({!$0.isOpen && !$0.isSet })
-    }
+    var openCards: [Card]
+    var selectedCards: [Card]
+    var cardsInDeck: [Card]
     
     //    MARK: - Methods
     
@@ -102,12 +96,13 @@ class Set {
     
     // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
-        if let random = randomCardIndexFromStack() {
-            if let card = open(allCards[random]) {
-                return card
-            }
+        if cardsInDeck.count > 0 {
+            let card = cardsInDeck[randomInt(within: 0...cardsInDeck.count)]
+            openCards.append(card)
+            return card
+        } else {
+            return nil
         }
-        return nil
     }
     
     func doesFormSet(with cards: [Card]) -> Bool {
@@ -176,7 +171,9 @@ class Set {
             for n in 0..<number {
                 for s in 0..<shading {
                     for c in 0..<color {
-                        allCards.append(Card(figure: f, number: n, shading: s, color: c))
+                        let card = Card(figure: f, number: n, shading: s, color: c)
+                        allCards.append(card)
+                        cardsInDeck.append(card)
                     }
                 }
             }
