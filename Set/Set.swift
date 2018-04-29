@@ -86,10 +86,11 @@ class Set {
     // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
         if cardsInDeck.count > 0 {
-            let card = cardsInDeck[randomInt(within: 0...cardsInDeck.count)]
             if openCards.count < maxOpenedCards {
-                openCards.append(card)
-                return card
+                let randomIndex = randomInt(within: 0...cardsInDeck.count)
+                openCards.append(cardsInDeck[randomIndex])
+                cardsInDeck.remove(at: randomIndex)
+                return openCards.last
             }
         }
         return nil
