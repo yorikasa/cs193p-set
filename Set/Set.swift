@@ -83,26 +83,16 @@ class Set {
         return isReplaced
     }
     
-    // Oepn specified card if there's enough space to open
-    func open(_ card: Card) -> Card? {
-        if openCards.count < maxOpenedCards {
-            if let index = allCards.index(of: card) {
-                allCards[index].isOpen = true
-                return card
-            }
-        }
-        return nil
-    }
-    
     // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
         if cardsInDeck.count > 0 {
             let card = cardsInDeck[randomInt(within: 0...cardsInDeck.count)]
-            openCards.append(card)
-            return card
-        } else {
-            return nil
+            if openCards.count < maxOpenedCards {
+                openCards.append(card)
+                return card
+            }
         }
+        return nil
     }
     
     func doesFormSet(with cards: [Card]) -> Bool {
