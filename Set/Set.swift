@@ -17,10 +17,11 @@ class Set {
     var score: Int
     
     // cards
-    var allCards: [Card]
-    var openCards: [Card]
-    var selectedCards: [Card]
-    var cardsInDeck: [Card]
+    var allCards: [Card] = []
+    var openCards: [Card] = []
+    var selectedCards: [Card] = []
+    var matchedCards: [Card] = []
+    var cardsInDeck: [Card] = []
     
     //    MARK: - Methods
     
@@ -29,10 +30,14 @@ class Set {
         if replaceCards() {
             return
         }
-        if let cardIndex = allCards.index(where: {$0.id == id}) {
+        if let cardIndex = openCards.index(where: {$0.id == id}) {
             // If already selected, then deselect (true -> false)
             // If not selected, then select (false -> true)
-            allCards[cardIndex].isSelected = !allCards[cardIndex].isSelected
+            if let selectedCardIndex = selectedCards.index(where: {$0.id == id}) {
+                selectedCards.remove(at: selectedCardIndex)
+            } else {
+                selectedCards.append(openCards[cardIndex])
+            }
         }
         
         // New card selected after 3 cards were un/matched
@@ -40,11 +45,9 @@ class Set {
         //
         // Reset all selected cards states to unselected, and select the new card
         if selectedCards.count > 3 {
-            for index in allCards.indices {
-                allCards[index].isSelected = false
-            }
-            if let cardIndex = allCards.index(where: {$0.id == id}) {
-                allCards[cardIndex].isSelected = true
+            selectedCards.removeAll()
+            if let cardIndex = openCards.index(where: {$0.id == id}) {
+                selectedCards.append(openCards[cardIndex])
             }
         }
         // New card is the 3rd card to the selection
@@ -54,9 +57,7 @@ class Set {
             if doesFormSet(with: selectedCards) {
                 // three cards formed a set
                 for card in selectedCards {
-                    if let cardIndex = allCards.index(where: {$0.id == card.id}) {
-                        allCards[cardIndex].isSet = true
-                    }
+                    matchedCards.append(card)
                 }
                 score += 3
             } else {
@@ -73,9 +74,9 @@ class Set {
     // close these cards and replace them with new cards from the deck
     func replaceCards() -> Bool{
         var isReplaced = false
-        for cardIndex in allCards.indices {
-            if allCards[cardIndex].isSet == true, allCards[cardIndex].isOpen == true{
-                allCards[cardIndex].isOpen = false
+        for cardIndex in openCards.indices {
+            if matchedCards.contains(openCards[cardIndex]) {
+                openCards.remove(at: cardIndex)
                 _ = openCardFromDeck()
                 isReplaced = true
             }
@@ -147,7 +148,6 @@ class Set {
         self.score = 0
         
         // Initialize all 81 cards
-        allCards = []
         for f in 0..<figures {
             for n in 0..<number {
                 for s in 0..<shading {
