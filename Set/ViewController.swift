@@ -102,6 +102,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func highlightCards() {
+        
+    }
+    
     // return a corresponding card object from a card button
     func card(of cardButton: UIButton) -> Card? {
         let cards = game.allCards.filter({$0.id == cardButton.tag})
