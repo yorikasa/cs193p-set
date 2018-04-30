@@ -22,9 +22,8 @@ class Set {
     
     func selectCard(at id: Int) {
         // if there's any card to replace, then replace them and do nothing
-        if replaceCards() {
-            return
-        }
+        _ = replaceCards()
+        
         if let cardIndex = openCards.index(where: {$0.id == id}) {
             // If already selected, then deselect (true -> false)
             // If not selected, then select (false -> true)
@@ -69,13 +68,14 @@ class Set {
     // close these cards and replace them with new cards from the deck
     func replaceCards() -> Bool{
         var isReplaced = false
-        for cardIndex in openCards.indices {
+        for cardIndex in openCards.indices.reversed() {
             if matchedCards.contains(openCards[cardIndex]) {
                 openCards.remove(at: cardIndex)
                 _ = openCardFromDeck()
                 isReplaced = true
             }
         }
+        
         return isReplaced
     }
     
@@ -92,7 +92,7 @@ class Set {
     
     func doesFormSet(with cards: [Card]) -> Bool {
         // for the test purpose
-        //return true
+        return true
         
         // If all attributes of 3 cards are either different or same, they make a set
         // e.g. figures of all cards are same (●)

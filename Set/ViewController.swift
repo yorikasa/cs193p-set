@@ -66,6 +66,7 @@ class ViewController: UIViewController {
     
     func drawCardButton(cardButton : UIButton) {
         if let card = card(of: cardButton) {
+            cardButton.layer.opacity = 1.0
             var attributes: [NSAttributedStringKey : Any] = [
                 .foregroundColor: color[card.colorId]
             ]
@@ -85,28 +86,23 @@ class ViewController: UIViewController {
     
     // de/highlight the card button depends on the corresponding card
     func highlightCard(cardButton: UIButton) {
-        if let card = card(of: cardButton) {
-            if card.isSelected {
-                cardButton.layer.borderWidth = 2.0
-                if card.isSet {
-                    cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
-                } else {
-                    cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                }
-            } else {
-                cardButton.layer.borderWidth = 0
-                cardButton.layer.borderColor = nil
-            }
-        }
-    }
-    
-    func highlightCards() {
+        // default: de-highlight
+        cardButton.layer.borderWidth = 0
+        cardButton.layer.borderColor = nil
         
+        if game.selectedCards.contains(where: {$0.id == cardButton.tag}) {
+            cardButton.layer.borderWidth = 2.0
+            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        }
+        if game.matchedCards.contains(where: {$0.id == cardButton.tag}) {
+            cardButton.layer.borderWidth = 2.0
+            cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        }
     }
     
     // return a corresponding card object from a card button
     func card(of cardButton: UIButton) -> Card? {
-        let cards = game.allCards.filter({$0.id == cardButton.tag})
+        let cards = game.openCards.filter({$0.id == cardButton.tag})
         if cards.count == 1 {
             return cards.first
         } else {
@@ -122,7 +118,6 @@ class ViewController: UIViewController {
     func openCard(of cardButton: UIButton) {
         if game.openCards.count < cardButtons.count {
             if let card = game.openCardFromDeck() {
-                cardButton.layer.opacity = 1.0
                 cardButton.tag = card.id
                 drawCardButton(cardButton: cardButton)
             }
@@ -162,22 +157,21 @@ class ViewController: UIViewController {
         // TODO: if there are no cards to replace (empty deck), what will happen
         // workaround
         for i in 0..<newlyOpenedCardTags.count {
-            openCard(of: cardButtons[cardButtonIndicesToReplace[i]], withTag: newlyOpenedCardTags[i])
+            cardButtons[cardButtonIndicesToReplace[i]].tag = newlyOpenedCardTags[i]
+            drawCardButton(cardButton: cardButtons[cardButtonIndicesToReplace[i]])
         }
         
         for cardButton in cardButtons {
-            if let card = card(of: cardButton) {
+            if card(of: cardButton) != nil {
+            } else {
                 // hide matched cards when there's no cards to deal from the deck
-                if card.isOpen == false {
-                    hideCard(of: cardButton)
-                }
+                hideCard(of: cardButton)
             }
             highlightCard(cardButton: cardButton)
         }
         // when cards matched these cards are keep opened until a next card is selected
         // so exclude these already matched but open cards to deal new cards
-        let availableCards = game.allCards.filter({$0.isOpen == true && $0.isSet == false})
-        if (game.cardsInDeck.count == 0) || (availableCards.count == cardButtons.count) {
+        if (game.cardsInDeck.count == 0) || (game.openCards.count == cardButtons.count) {
             dealCardsButton.isEnabled = false
         } else {
             dealCardsButton.isEnabled = true
