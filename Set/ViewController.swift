@@ -93,11 +93,19 @@ class ViewController: UIViewController {
         if game.selectedCards.contains(where: {$0.id == cardButton.tag}) {
             cardButton.layer.borderWidth = 2.0
             cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            
+            if game.selectedCards.count == 3 {
+                cardButton.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            }
         }
         if game.matchedCards.contains(where: {$0.id == cardButton.tag}) {
             cardButton.layer.borderWidth = 2.0
             cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         }
+    }
+    
+    func highlightCards(cardButtons: [UIButton]) {
+        
     }
     
     // return a corresponding card object from a card button

@@ -40,6 +40,7 @@ class Set {
         // Reset all selected cards states to unselected, and select the new card
         if selectedCards.count > 3 {
             selectedCards.removeAll()
+            matchedCards.removeAll()
             if let cardIndex = openCards.index(where: {$0.id == id}) {
                 selectedCards.append(openCards[cardIndex])
             }
