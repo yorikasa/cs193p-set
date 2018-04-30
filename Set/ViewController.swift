@@ -171,7 +171,8 @@ class ViewController: UIViewController {
         }
         // when cards matched these cards are keep opened until a next card is selected
         // so exclude these already matched but open cards to deal new cards
-        if (game.cardsInDeck.count == 0) || (game.openCards.count == cardButtons.count) {
+        if game.cardsInDeck.count == 0 ||
+           (game.openCards.count == cardButtons.count && game.cardsToReplace() == nil) {
             dealCardsButton.isEnabled = false
         } else {
             dealCardsButton.isEnabled = true

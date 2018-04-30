@@ -64,19 +64,31 @@ class Set {
         }
     }
     
+    func cardsToReplace() -> [Card]? {
+        var cards: [Card]? = nil
+        for cardIndex in openCards.indices.reversed() {
+            if matchedCards.contains(openCards[cardIndex]) {
+                if cards == nil {
+                    cards = [Card]()
+                }
+                cards?.append(openCards[cardIndex])
+            }
+        }
+        return cards
+    }
+    
     // if there are cards to be replaced (matched in a previous selection)
     // close these cards and replace them with new cards from the deck
     func replaceCards() -> Bool{
-        var isReplaced = false
-        for cardIndex in openCards.indices.reversed() {
-            if matchedCards.contains(openCards[cardIndex]) {
-                openCards.remove(at: cardIndex)
+        if let cards = cardsToReplace() {
+            for card in cards {
+                openCards.remove(at: openCards.index(of: card)!)
                 _ = openCardFromDeck()
-                isReplaced = true
             }
+            return true
+        } else {
+            return false
         }
-        
-        return isReplaced
     }
     
     // Open random card from the deck if there's enough space to open
