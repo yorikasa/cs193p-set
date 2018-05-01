@@ -95,7 +95,7 @@ class Set {
     // Open random card from the deck if there's enough space to open
     func openCardFromDeck() -> Card? {
         if cardsInDeck.count > 0 {
-            let randomIndex = randomInt(within: 0...cardsInDeck.count)
+            let randomIndex = (0...cardsInDeck.count).random
             openCards.append(cardsInDeck[randomIndex])
             cardsInDeck.remove(at: randomIndex)
             return openCards.last
@@ -141,12 +141,7 @@ class Set {
         return true
     }
     
-    
-    // randomInt(10...100) returns random value from 10 to 100 (10 and 100 both included)
-    func randomInt(within range: CountableClosedRange<Int>) -> Int{
-        return Int(arc4random_uniform(UInt32(range.upperBound))) + range.lowerBound
-    }
-    
+
     init(figures: Int, number: Int, shading: Int, color: Int) {
         Card.idGenerator = 0
         
@@ -166,6 +161,12 @@ class Set {
     }
 }
 
+// randomInt(10...100) returns random value from 10 to 100 (10 and 100 both included)
+extension CountableClosedRange where Element == Int {
+    var random: Int {
+        return Int(arc4random_uniform(UInt32(self.upperBound))) + self.lowerBound
+    }
+}
 
 extension Array where Element: Equatable {
     // If all the array's elements are same
