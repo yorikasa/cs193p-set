@@ -118,8 +118,7 @@ class Set {
     
 
     init(figures: Int, number: Int, shading: Int, color: Int) {
-        Card.idGenerator = 0
-        
+        Card.resetIdGenerator()
         self.score = 0
         
         // Initialize all 81 cards

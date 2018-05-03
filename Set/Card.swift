@@ -9,18 +9,22 @@
 import Foundation
 
 struct Card: Equatable {
-    private let id: Int
+    let id: Int
     
-    private let figureId: Int
-    private let numberId: Int
-    private let shadingId: Int
-    private let colorId: Int
+    let figureId: Int
+    let numberId: Int
+    let shadingId: Int
+    let colorId: Int
     
     static private var idGenerator = 0
     
     static private func createId() -> Int {
         self.idGenerator += 1
         return self.idGenerator
+    }
+    
+    static func resetIdGenerator() {
+        idGenerator = 0
     }
     
     init(figure: Int, number: Int, shading: Int, color: Int){
