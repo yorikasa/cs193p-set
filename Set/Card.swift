@@ -35,4 +35,23 @@ struct Card: Equatable {
     static func ==(lhs: Card, rhs: Card) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    func matches(to card2: Card, and card3: Card) -> Bool {
+        let card1 = self
+        
+        let figureIds = [card1.figureId, card2.figureId, card3.figureId]
+        let numberIds = [card1.numberId, card2.numberId, card3.numberId]
+        let shadingIds = [card1.shadingId, card2.shadingId, card3.shadingId]
+        let colorIds = [card1.colorId, card2.colorId, card3.colorId]
+        
+        let cardIds = [figureIds, numberIds, shadingIds, colorIds]
+        
+        func canBeMatched(_ ids: [Int]) -> Bool {
+            if ids.hasAllSameElements || ids.hasAllDifferentElements {
+                return true
+            }
+            return false
+        }
+        return cardIds.map{ canBeMatched($0) }.reduce(true, {$0 && $1})
+    }
 }
