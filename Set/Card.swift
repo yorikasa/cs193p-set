@@ -16,6 +16,30 @@ struct Card: Equatable {
     let shadingId: Int
     let colorId: Int
     
+    enum Figure {
+        case square
+        case circle
+        case triangle
+    }
+    
+    enum Number {
+        case one
+        case two
+        case three
+    }
+    
+    enum Shade {
+        case solid
+        case open
+        case striped
+    }
+    
+    enum Color {
+        case blue
+        case green
+        case red
+    }
+    
     static private var idGenerator = 0
     
     static private func createId() -> Int {
