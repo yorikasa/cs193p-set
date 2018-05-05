@@ -12,6 +12,7 @@
 		B6334075201F465F00161CE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6334073201F465F00161CE1 /* Main.storyboard */; };
 		B6334077201F465F00161CE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6334076201F465F00161CE1 /* Assets.xcassets */; };
 		B633407A201F465F00161CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6334078201F465F00161CE1 /* LaunchScreen.storyboard */; };
+		B6CAECAC209D75EE00549FAE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CAECAB209D75EE00549FAE /* CardView.swift */; };
 		B6D12C192030113700799F77 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D12C182030113700799F77 /* Set.swift */; };
 		B6D12C1B2030133500799F77 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D12C1A2030133500799F77 /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		B6334076201F465F00161CE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6334079201F465F00161CE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B633407B201F465F00161CE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6CAECAB209D75EE00549FAE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B6D12C182030113700799F77 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		B6D12C1A2030133500799F77 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +62,7 @@
 			children = (
 				B633406F201F465F00161CE1 /* AppDelegate.swift */,
 				B6334071201F465F00161CE1 /* ViewController.swift */,
+				B6CAECAB209D75EE00549FAE /* CardView.swift */,
 				B6334073201F465F00161CE1 /* Main.storyboard */,
 				B6D12C182030113700799F77 /* Set.swift */,
 				B6D12C1A2030133500799F77 /* Card.swift */,
@@ -146,6 +149,7 @@
 				B6334070201F465F00161CE1 /* AppDelegate.swift in Sources */,
 				B6D12C192030113700799F77 /* Set.swift in Sources */,
 				B6D12C1B2030133500799F77 /* Card.swift in Sources */,
+				B6CAECAC209D75EE00549FAE /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
