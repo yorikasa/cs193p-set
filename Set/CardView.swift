@@ -33,6 +33,7 @@ class CardView: UIView {
             setNeedsLayout()
         }
     }
+    var isFaceUp = true
     
 
     // draw subviews on this "CardView" view
@@ -47,7 +48,13 @@ class CardView: UIView {
         UIColor.white.setFill()
         roundRect.fill()
 
-        drawFigure()
+        if isFaceUp {
+            drawFigure()
+        } else {
+            if let cardBackImage = UIImage(named: "cardBack") {
+                cardBackImage.draw(in: bounds)
+            }
+        }
     }
 }
 
