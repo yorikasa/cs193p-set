@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class CardView: UIView {
     var figure = Card.Figure.circle {
         didSet {
@@ -33,7 +34,8 @@ class CardView: UIView {
             setNeedsLayout()
         }
     }
-    var isFaceUp = true
+    @IBInspectable
+    var isFaceUp: Bool = true
     
 
     // draw subviews on this "CardView" view
@@ -51,7 +53,7 @@ class CardView: UIView {
         if isFaceUp {
             drawFigure()
         } else {
-            if let cardBackImage = UIImage(named: "cardBack") {
+            if let cardBackImage = UIImage(named: "cardBack", in: Bundle(for: self.classForCoder), compatibleWith: traitCollection) {
                 cardBackImage.draw(in: bounds)
             }
         }
