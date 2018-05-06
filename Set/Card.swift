@@ -16,25 +16,25 @@ struct Card: Equatable {
     let shadingId: Int
     let colorId: Int
     
-    enum Figure {
+    enum Figure: Int {
         case square
         case circle
         case triangle
     }
     
-    enum Number {
+    enum Number: Int {
         case one
         case two
         case three
     }
     
-    enum Shade {
+    enum Shade: Int {
         case solid
         case open
         case striped
     }
     
-    enum Color {
+    enum Color: Int {
         case blue
         case green
         case red

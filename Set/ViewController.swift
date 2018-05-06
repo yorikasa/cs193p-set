@@ -187,13 +187,40 @@ class ViewController: UIViewController {
         score = game.score
     }
     
+    private func setup() {
+        cardViews.removeAll()
+        game = Set(figures: figures.count, number: number.count,
+                   shading: shading.count, color: color.count)
+        
+        for _ in 0..<initialVisibleCards {
+            let randomX = (0...300).random
+            let randomY = (0...800).random
+            let randomWidth = CGFloat((50...100).random)
+            let randomHeight = CGFloat(randomWidth * (89/64))
+            openCardView(at: CGPoint(x: randomX, y: randomY), size: CGSize(width: randomWidth, height: randomHeight))
+        }
+    }
+    
+    private func openCardView(at origin: CGPoint, size: CGSize) {
+        let cardRect = CGRect(origin: origin, size: size)
+        let cardView = CardView(frame: cardRect)
+        view.addSubview(cardView)
+        if let card = game.openCardFromDeck() {
+            cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
+                                   number: Card.Number(rawValue: card.numberId)!,
+                                   shade: Card.Shade(rawValue: card.shadingId)!,
+                                   color: Card.Color(rawValue: card.colorId)!)
+        }
+    }
+    
     
     
     //    MARK: - etc
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        reset()
+        //reset()
+        setup()
         registerGestures()
     }
 
