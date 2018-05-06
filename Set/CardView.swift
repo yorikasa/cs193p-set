@@ -38,8 +38,25 @@ class CardView: UIView {
     var isFaceUp: Bool = true {
         didSet {
             setNeedsDisplay()
-            setNeedsLayout()
         }
+    }
+    @IBInspectable
+    var isSelected: Bool = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    var status: Status = Status.normal {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    enum Status {
+        case matched
+        case unmatched
+        case normal
     }
     
 
@@ -54,6 +71,24 @@ class CardView: UIView {
         roundRect.addClip()
         UIColor.white.setFill()
         roundRect.fill()
+        
+        if isSelected {
+            UIColor.blue.setStroke()
+            roundRect.lineWidth = 1.5
+            roundRect.stroke()
+        }
+        switch status {
+        case Status.matched:
+            UIColor.red.setStroke()
+            roundRect.lineWidth = 1.5
+            roundRect.stroke()
+        case Status.unmatched:
+            UIColor.gray.setStroke()
+            roundRect.lineWidth = 1.5
+            roundRect.stroke()
+        default:
+            break
+        }
 
         if isFaceUp {
             drawFigure()
