@@ -9,7 +9,7 @@
 import UIKit
 
 class CardView: UIView {
-    var figure = Card.Figure.square {
+    var figure = Card.Figure.circle {
         didSet {
             setNeedsDisplay()
             setNeedsLayout()
@@ -21,7 +21,7 @@ class CardView: UIView {
             setNeedsLayout()
         }
     }
-    var shading = Card.Shade.solid {
+    var shading = Card.Shade.striped {
         didSet {
             setNeedsDisplay()
             setNeedsLayout()
@@ -46,73 +46,62 @@ class CardView: UIView {
         roundRect.addClip()
         UIColor.white.setFill()
         roundRect.fill()
-        
-        //createCardFace(figure: figure, number: numbers, shade: shading, color: color)'
-        drawFigure(number: Card.Number.three, color: UIColor.blue, figure: Card.Figure.circle, shading: Card.Shade.striped)
+
+        drawFigure()
     }
 }
 
 // MARK: - CardView Private Methods
 extension CardView {
-    private func drawFigure(number: Card.Number, color: UIColor,
-                            figure: Card.Figure, shading: Card.Shade) {
-        let originX = bounds.center.x - figureWidth/2
-        let originY = bounds.center.y - figureHeight/2
+    private func drawFigure() {
+        // find out the number of figures and their origins (x,y)
+        let origins = figureOrigins()
         
-        switch shading {
-        case Card.Shade.open:
-            color.setStroke()
-        case Card.Shade.solid:
-            color.setFill()
-        case Card.Shade.striped:
-            let stripePath = UIBezierPath()
-            let stripeWidth = figureWidth / CGFloat(SizeRatio.stripeWidth)
-            let stripeHeight = figureHeight*3 + figureMargin*2
-            
-            for i in 0...SizeRatio.stripeWidth {
-                if i%2 == 1 {
-                    continue
-                }
-                let stripeRect = CGRect(x: originX + CGFloat(i)*stripeWidth, y: originY-figureMargin-figureHeight, width: stripeWidth, height: stripeHeight)
-                let newRect = UIBezierPath(rect: stripeRect)
-                stripePath.append(newRect)
-            }
-            stripePath.addClip()
-            color.setFill()
-        }
-        
-        let originYs = figuresYPoints(number: number, originY: originY)
-        
-        for y in originYs {
-            var path: UIBezierPath
-            
-            switch figure {
-            case Card.Figure.square:
-                let rect = CGRect(x: originX, y: y, width: figureWidth, height: figureHeight)
-                path = UIBezierPath(rect: rect)
-            case Card.Figure.circle:
-                path = UIBezierPath(arcCenter: CGPoint(x: bounds.center.x, y: y+figureHeight/2), radius: figureWidth/2, startAngle: 0, endAngle: CGFloat.pi*2, clockwise: true)
-            case Card.Figure.triangle:
-                path = UIBezierPath()
-                path.move(to: CGPoint(x: originX+figureWidth/2, y: y))
-                path.addLine(to: CGPoint(x: originX+figureWidth, y: y+figureHeight))
-                path.addLine(to: CGPoint(x: originX, y: y+figureHeight))
-                path.addLine(to: CGPoint(x: originX+figureWidth/2, y: y))
-                path.close()
-            }
-            switch shading {
-            case Card.Shade.solid:
-                path.fill()
-            case Card.Shade.open:
-                path.lineWidth = 1.5
-                path.stroke()
-            case Card.Shade.striped:
-                path.fill()
-            }
+        for origin in origins {
+            let path = createPath(at: origin)
+            drawPath(path)
         }
     }
     
-    private func createPath(of figure: Card.Figure, at origin: CGPoint) -> UIBezierPath {
+    // this method will be called unnecessarily many time
+    // it should be called only once, but i can't find a smart answer
+    private func stripedClippingPath(bounds: CGRect) -> UIBezierPath {
+        let origin = CGPoint(x: bounds.minX, y: self.bounds.minY)
+        let stripePath = UIBezierPath()
+        let stripeWidth = bounds.width / CGFloat(SizeRatio.stripeWidth)
+        let stripeHeight = self.bounds.height
+        
+        for i in 0...SizeRatio.stripeWidth {
+            if i%2 == 1 {
+                continue
+            }
+            let stripeRect = CGRect(x: origin.x + CGFloat(i)*stripeWidth, y: origin.y,
+                                    width: stripeWidth, height: stripeHeight)
+            let newRect = UIBezierPath(rect: stripeRect)
+            stripePath.append(newRect)
+        }
+        return stripePath
+    }
+    
+    private func drawPath(_ path: UIBezierPath) {
+        let drawingColor = self.uiColor()
+        
+        switch shading {
+        case Card.Shade.solid:
+            drawingColor.setFill()
+            path.fill()
+        case Card.Shade.open:
+            drawingColor.setStroke()
+            path.lineWidth = 1.5
+            path.stroke()
+        case Card.Shade.striped:
+            stripedClippingPath(bounds: path.bounds).addClip()
+            drawingColor.setFill()
+            path.fill()
+        }
+    }
+    
+    private func createPath(at origin: CGPoint) -> UIBezierPath {
         var path: UIBezierPath
         
         switch figure {
@@ -134,25 +123,12 @@ extension CardView {
         return path
     }
     
-    private func figuresYPoints(number: Card.Number, originY: CGFloat) -> [CGFloat] {
-        let originYs: [CGFloat]
-        switch number {
-        case Card.Number.one:
-            originYs = [originY]
-        case Card.Number.two:
-            originYs = [bounds.center.y-figureMargin/2-figureHeight, bounds.center.y+figureMargin/2]
-        case Card.Number.three:
-            originYs = [originY, originY-figureHeight-figureMargin, originY+figureMargin+figureHeight]
-        }
-        return originYs
-    }
-    
-    private func figureOrigins(number: Card.Number) -> [CGPoint] {
+    private func figureOrigins() -> [CGPoint] {
         var origins: [CGPoint]
         let x = bounds.center.x - figureWidth/2
         let y = bounds.center.y - figureHeight/2
         
-        switch number {
+        switch numbers {
         case Card.Number.one:
             origins = [CGPoint(x: x, y: y)]
         case Card.Number.two:
@@ -166,6 +142,17 @@ extension CardView {
             origins = [point1, point2, point3]
         }
         return origins
+    }
+    
+    private func uiColor() -> UIColor {
+        switch color {
+        case Card.Color.blue:
+            return UIColor.blue
+        case Card.Color.green:
+            return UIColor.green
+        case Card.Color.red:
+            return UIColor.red
+        }
     }
 }
 
@@ -202,10 +189,10 @@ extension CardView {
     }
 }
 
+// MARK: - other extensions
 
 extension CGRect {
     var center: CGPoint {
         return CGPoint(x: (maxX-minX)/2, y: (maxY-minY)/2)
     }
 }
-
