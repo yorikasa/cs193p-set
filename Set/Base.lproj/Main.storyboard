@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -281,21 +282,36 @@
                                     <constraint firstAttribute="bottom" secondItem="A2z-Se-PbO" secondAttribute="bottom" id="vdi-pZ-7n4"/>
                                 </constraints>
                             </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wDX-Qx-VHX" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="155" y="54.999999999999986" width="140" height="194.66666666666663"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="200" id="6xn-Mz-tDC"/>
+                                    <constraint firstAttribute="width" secondItem="wDX-Qx-VHX" secondAttribute="height" multiplier="64:89" id="Pyh-4I-NAa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ryD-Ce-zML" firstAttribute="top" secondItem="4pu-d4-0w4" secondAttribute="bottom" constant="8" id="0ub-s9-eKW"/>
                             <constraint firstItem="ryD-Ce-zML" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="5Sx-xM-xFd"/>
                             <constraint firstItem="MoE-em-JAb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="63Z-mQ-DYZ"/>
+                            <constraint firstItem="wDX-Qx-VHX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="155" id="7zc-oG-NJ6"/>
                             <constraint firstItem="gph-eW-a8K" firstAttribute="top" secondItem="0fn-gi-Uiy" secondAttribute="bottom" constant="8" id="8gF-cR-gCV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4pu-d4-0w4" secondAttribute="trailing" constant="16" id="AX0-X3-eei"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gph-eW-a8K" secondAttribute="bottom" constant="8" id="C4O-DL-KlU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gph-eW-a8K" secondAttribute="trailing" constant="16" id="N8f-GB-t2p"/>
+                            <constraint firstItem="wDX-Qx-VHX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="11" id="PiQ-Op-ZWx"/>
                             <constraint firstItem="lTD-zd-wCa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RJN-J2-QYE"/>
                             <constraint firstItem="lTD-zd-wCa" firstAttribute="top" secondItem="ryD-Ce-zML" secondAttribute="bottom" constant="8" id="S0G-hO-UX1"/>
                             <constraint firstItem="Ter-nv-zZq" firstAttribute="top" secondItem="MoE-em-JAb" secondAttribute="bottom" constant="8" id="TUj-kh-lue"/>
                             <constraint firstItem="Ter-nv-zZq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Uwc-5i-GD0"/>
                             <constraint firstItem="MoE-em-JAb" firstAttribute="top" secondItem="lTD-zd-wCa" secondAttribute="bottom" constant="8" id="WPO-Qj-UdY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wDX-Qx-VHX" secondAttribute="trailing" constant="80" id="YJb-jc-Zpr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ryD-Ce-zML" secondAttribute="trailing" constant="16" id="YaF-dy-eIM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MoE-em-JAb" secondAttribute="trailing" constant="16" id="d1z-Pa-MJU"/>
                             <constraint firstItem="0fn-gi-Uiy" firstAttribute="top" secondItem="Ter-nv-zZq" secondAttribute="bottom" constant="8" id="gIi-Y4-iX2"/>
@@ -311,6 +327,7 @@
                     <connections>
                         <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
                         <outlet property="scoreLabel" destination="A2z-Se-PbO" id="RqH-zO-Qas"/>
+                        <outlet property="testCardView" destination="wDX-Qx-VHX" id="XD7-Pd-Xdg"/>
                         <outletCollection property="cardButtons" destination="3vA-Nm-xhH" collectionClass="NSMutableArray" id="wFV-85-yMi"/>
                         <outletCollection property="cardButtons" destination="9RW-VU-EyW" collectionClass="NSMutableArray" id="fku-Tx-bV6"/>
                         <outletCollection property="cardButtons" destination="46i-H1-74A" collectionClass="NSMutableArray" id="eE1-fC-2vM"/>
