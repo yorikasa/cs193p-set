@@ -39,7 +39,6 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var testCardView: CardView!
     
     
     
@@ -50,7 +49,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startNewGame(_ sender: UIButton) {
-        reset()
+        setup()
         updateCardsView()
     }
     
@@ -192,12 +191,15 @@ class ViewController: UIViewController {
         game = Set(figures: figures.count, number: number.count,
                    shading: shading.count, color: color.count)
         
-        for _ in 0..<initialVisibleCards {
-            let randomX = (0...300).random
-            let randomY = (0...800).random
-            let randomWidth = CGFloat((50...100).random)
-            let randomHeight = CGFloat(randomWidth * (89/64))
-            openCardView(at: CGPoint(x: randomX, y: randomY), size: CGSize(width: randomWidth, height: randomHeight))
+        var grid = Grid(layout: .aspectRatio(64/89), frame: view.bounds)
+        grid.cellCount = initialVisibleCards
+        
+        for i in 0..<initialVisibleCards {
+            if let gridRect = grid[i] {
+                let width = gridRect.width * 0.9
+                let height = width * 89/64
+                openCardView(at: gridRect.origin, size: CGSize(width: width, height: height))
+            }
         }
     }
     
