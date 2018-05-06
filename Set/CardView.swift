@@ -58,10 +58,31 @@ class CardView: UIView {
             }
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setAttributes(figure: Card.Figure, number: Card.Number, shade:Card.Shade, color:Card.Color) {
+        self.figure = figure
+        self.numbers = number
+        self.shading = shade
+        self.color = color
+    }
 }
 
 // MARK: - CardView Private Methods
 extension CardView {
+    private func setup() {
+        self.isOpaque = false
+    }
+    
     private func drawFigure() {
         // find out the number of figures and their origins (x,y)
         let origins = figureOrigins()
