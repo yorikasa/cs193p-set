@@ -35,7 +35,12 @@ class CardView: UIView {
         }
     }
     @IBInspectable
-    var isFaceUp: Bool = true
+    var isFaceUp: Bool = true {
+        didSet {
+            setNeedsDisplay()
+            setNeedsLayout()
+        }
+    }
     
 
     // draw subviews on this "CardView" view

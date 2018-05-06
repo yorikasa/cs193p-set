@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var testCardView: CardView!
     
     //    MARK: - Actions
     
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dealCards(_ sender: UIButton) {
+        if dealCardsButton.isEnabled == false { return }
         if !game.replaceCards() {
             for _ in 1...3 {
                 _ = game.openCardFromDeck()
@@ -188,6 +190,26 @@ class ViewController: UIViewController {
         score = game.score
     }
     
+    // sorry it actually is reversed
+    @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            print("rotated: \(sender.rotation)")
+            updateCardsView()
+        default:
+            break
+        }
+    }
+    
+    private func registerGestures() {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealCards(_:)))
+        swipe.direction = [UISwipeGestureRecognizerDirection.down]
+        view.addGestureRecognizer(swipe)
+        
+        let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
+        view.addGestureRecognizer(rotation)
+    }
+    
     
     //    MARK: - etc
     
@@ -195,6 +217,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         reset()
+        registerGestures()
     }
 
     override func didReceiveMemoryWarning() {

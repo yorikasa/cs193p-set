@@ -285,6 +285,7 @@
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wDX-Qx-VHX" customClass="CardView" customModule="Set" customModuleProvider="target">
                                 <rect key="frame" x="155" y="54.999999999999986" width="140" height="194.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="200" id="6xn-Mz-tDC"/>
                                     <constraint firstAttribute="width" secondItem="wDX-Qx-VHX" secondAttribute="height" multiplier="64:89" id="Pyh-4I-NAa"/>
@@ -326,6 +327,7 @@
                     <connections>
                         <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
                         <outlet property="scoreLabel" destination="A2z-Se-PbO" id="RqH-zO-Qas"/>
+                        <outlet property="testCardView" destination="wDX-Qx-VHX" id="XD7-Pd-Xdg"/>
                         <outletCollection property="cardButtons" destination="3vA-Nm-xhH" collectionClass="NSMutableArray" id="wFV-85-yMi"/>
                         <outletCollection property="cardButtons" destination="9RW-VU-EyW" collectionClass="NSMutableArray" id="fku-Tx-bV6"/>
                         <outletCollection property="cardButtons" destination="46i-H1-74A" collectionClass="NSMutableArray" id="eE1-fC-2vM"/>
