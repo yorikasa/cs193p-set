@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         }
     }
     
+    var cardViews = [CardView]()
+    
     lazy var game = Set(figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
     
@@ -34,15 +36,14 @@ class ViewController: UIViewController {
 
     
     //    MARK: - Outlets
-
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
-    
     @IBOutlet weak var testCardView: CardView!
     
-    //    MARK: - Actions
     
+    
+    //    MARK: - Actions
     @IBAction func touchCard(_ sender: UIButton) {
         game.selectCard(at: sender.tag)
         updateCardsView()
@@ -64,8 +65,8 @@ class ViewController: UIViewController {
     }
     
     
-    // MARK: - Functions
     
+    // MARK: - Functions
     func drawCardButton(cardButton : UIButton) {
         if let card = card(of: cardButton) {
             cardButton.layer.opacity = 1.0
@@ -106,10 +107,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func highlightCards(cardButtons: [UIButton]) {
-        
-    }
-    
     // return a corresponding card object from a card button
     func card(of cardButton: UIButton) -> Card? {
         let cards = game.openCards.filter({$0.id == cardButton.tag})
@@ -132,20 +129,6 @@ class ViewController: UIViewController {
                 drawCardButton(cardButton: cardButton)
             }
         }
-    }
-    
-    func reset() {
-        for cardButton in cardButtons {
-            hideCard(of: cardButton)
-            drawCardButton(cardButton: cardButton)
-        }
-        game = Set(figures: figures.count, number: number.count,
-                   shading: shading.count, color: color.count)
-        for i in 0..<initialVisibleCards {
-            openCard(of: cardButtons[i])
-            highlightCard(cardButton: cardButtons[i])
-        }
-        score = game.score
     }
     
     func updateCardsView() {
@@ -190,6 +173,40 @@ class ViewController: UIViewController {
         score = game.score
     }
     
+    private func reset() {
+        for cardButton in cardButtons {
+            hideCard(of: cardButton)
+            drawCardButton(cardButton: cardButton)
+        }
+        game = Set(figures: figures.count, number: number.count,
+                   shading: shading.count, color: color.count)
+        for i in 0..<initialVisibleCards {
+            openCard(of: cardButtons[i])
+            highlightCard(cardButton: cardButtons[i])
+        }
+        score = game.score
+    }
+    
+    
+    
+    //    MARK: - etc
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        reset()
+        registerGestures()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+}
+
+
+
+// MARK: - ViewController Gestures
+extension ViewController {
     // sorry it actually is reversed
     @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
         switch sender.state {
@@ -209,24 +226,4 @@ class ViewController: UIViewController {
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
         view.addGestureRecognizer(rotation)
     }
-    
-    
-    //    MARK: - etc
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        reset()
-        registerGestures()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
-
-
