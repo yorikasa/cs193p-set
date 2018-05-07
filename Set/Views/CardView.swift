@@ -121,6 +121,7 @@ class CardView: UIView {
 extension CardView {
     private func setup() {
         self.isOpaque = false
+        registerGestures()
     }
     
     private func drawFigure() {
@@ -223,6 +224,23 @@ extension CardView {
         case Card.Color.red:
             return UIColor.red
         }
+    }
+}
+
+// CardView Gestures
+extension CardView {
+    @objc private func tapCard(_ sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            self.isSelected = !self.isSelected
+        default:
+            break
+        }
+    }
+    
+    private func registerGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCard(_:)))
+        self.addGestureRecognizer(tap)
     }
 }
 
