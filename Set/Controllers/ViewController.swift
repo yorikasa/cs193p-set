@@ -12,12 +12,6 @@ class ViewController: UIViewController {
     
     //    MARK: - Instance Variables
     
-    // card variations
-    let figures = ["●", "▲", "■"]
-    let number = [1,2,3]
-    let shading = ["solid", "striped", "open"]
-    let color = [UIColor.blue, UIColor.green, UIColor.red]
-    
     let initialVisibleCards = 12
     var score = 0 {
         didSet {
@@ -27,13 +21,13 @@ class ViewController: UIViewController {
     
     var cardViews = [CardView]()
     
-    lazy var game = Set(figures: figures.count, number: number.count,
-                        shading: shading.count, color: color.count)
+    lazy var game = Set()
 
     
     //    MARK: - Outlets
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var cardsMatView: UIView!
     
     
     
@@ -61,25 +55,6 @@ class ViewController: UIViewController {
     
     
     // MARK: - Functions
-    func drawCardButton(cardButton : UIButton) {
-        if let card = card(of: cardButton) {
-            cardButton.layer.opacity = 1.0
-            var attributes: [NSAttributedStringKey : Any] = [
-                .foregroundColor: color[card.colorId]
-            ]
-            if card.shadingId == shading.index(of: "open") {
-                attributes[.strokeColor] = color[card.colorId]
-                attributes[.strokeWidth] = 10.0
-            } else if card.shadingId == shading.index(of: "striped") {
-                attributes[.underlineColor] = color[card.colorId]
-                attributes[.underlineStyle] = NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.styleSingle.rawValue
-            }
-            let attributedString = NSAttributedString(string: String(repeating: figures[card.figureId], count: number[card.numberId]), attributes: attributes)
-            cardButton.setAttributedTitle(attributedString, for: UIControlState.normal)
-        } else {
-            cardButton.setAttributedTitle(nil, for: UIControlState.normal)
-        }
-    }
     
     // de/highlight the card button depends on the corresponding card
     func highlightCard(cardButton: UIButton) {
@@ -116,12 +91,19 @@ class ViewController: UIViewController {
     }
     
     
-    private func setup() {
+    private func removeCardViews() {
+        for cardView in cardViews {
+            cardView.removeFromSuperview()
+        }
         cardViews.removeAll()
-        game = Set(figures: figures.count, number: number.count,
-                   shading: shading.count, color: color.count)
+    }
+    
+    
+    private func setup() {
+        removeCardViews()
+        game = Set()
         
-        var grid = Grid(layout: .aspectRatio(64/89), frame: view.bounds)
+        var grid = Grid(layout: .aspectRatio(64/89), frame: cardsMatView.bounds)
         grid.cellCount = initialVisibleCards
         
         for i in 0..<initialVisibleCards {
@@ -136,7 +118,8 @@ class ViewController: UIViewController {
     private func openCardView(at origin: CGPoint, size: CGSize) {
         let cardRect = CGRect(origin: origin, size: size)
         let cardView = CardView(frame: cardRect)
-        view.addSubview(cardView)
+        cardViews.append(cardView)
+        cardsMatView.addSubview(cardView)
         if let card = game.openCardFromDeck() {
             cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
                                    number: Card.Number(rawValue: card.numberId)!,
@@ -148,11 +131,19 @@ class ViewController: UIViewController {
     
     
     //    MARK: - etc
+    
+    // when this view controller's `viewDidLoad()` gets called,
+    // its subviews don't be adjusted their layout
+    // for now I'm not sure its' recommended way of get subview's proper dimension
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setup()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //reset()
-        setup()
+        
         registerGestures()
     }
 

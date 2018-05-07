@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Set" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gph-eW-a8K" userLabel="Bottom Controls">
-                                <rect key="frame" x="16" y="740" width="343" height="30"/>
+                                <rect key="frame" x="16" y="530" width="288" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik2-5s-wFY">
                                         <rect key="frame" x="0.0" y="0.0" width="89" height="30"/>
@@ -32,7 +32,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIf-SZ-b2J">
-                                        <rect key="frame" x="230" y="0.0" width="113" height="30"/>
+                                        <rect key="frame" x="175" y="0.0" width="113" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hzQ-Cx-wE9"/>
                                         </constraints>
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2z-Se-PbO">
-                                        <rect key="frame" x="166" y="0.0" width="10.333333333333343" height="30"/>
+                                        <rect key="frame" x="138.5" y="0.0" width="10.5" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="tF0-j4-oR9"/>
                                         </constraints>
@@ -64,16 +64,24 @@
                                     <constraint firstAttribute="bottom" secondItem="A2z-Se-PbO" secondAttribute="bottom" id="vdi-pZ-7n4"/>
                                 </constraints>
                             </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpB-ip-GT8">
+                                <rect key="frame" x="16" y="28" width="288" height="494"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="jpB-ip-GT8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="4sY-QC-PM1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpB-ip-GT8" secondAttribute="trailing" constant="16" id="8Pu-Gk-xqk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gph-eW-a8K" secondAttribute="bottom" constant="8" id="C4O-DL-KlU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gph-eW-a8K" secondAttribute="trailing" constant="16" id="N8f-GB-t2p"/>
+                            <constraint firstItem="jpB-ip-GT8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="XPT-z8-QAr"/>
+                            <constraint firstItem="gph-eW-a8K" firstAttribute="top" secondItem="jpB-ip-GT8" secondAttribute="bottom" constant="8" id="XYC-7v-bCk"/>
                             <constraint firstItem="gph-eW-a8K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="i03-ZT-gNX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cardsMatView" destination="jpB-ip-GT8" id="p7r-5v-pkj"/>
                         <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
                         <outlet property="scoreLabel" destination="A2z-Se-PbO" id="RqH-zO-Qas"/>
                     </connections>

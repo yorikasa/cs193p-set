@@ -117,15 +117,15 @@ class Set {
     }
     
 
-    init(figures: Int, number: Int, shading: Int, color: Int) {
+    init() {
         Card.resetIdGenerator()
         self.score = 0
         
         // Initialize all 81 cards
-        for f in 0..<figures {
-            for n in 0..<number {
-                for s in 0..<shading {
-                    for c in 0..<color {
+        for f in 0..<3 {
+            for n in 0..<3 {
+                for s in 0..<3 {
+                    for c in 0..<3 {
                         let card = Card(figure: f, number: n, shading: s, color: c)
                         cardsInDeck.append(card)
                     }
