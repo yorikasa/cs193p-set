@@ -28,7 +28,7 @@
                                         </constraints>
                                         <state key="normal" title="Deal 3 Cards"/>
                                         <connections>
-                                            <action selector="dealCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xe6-QT-vh3"/>
+                                            <action selector="touchDealCardsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xe6-QT-vh3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIf-SZ-b2J">

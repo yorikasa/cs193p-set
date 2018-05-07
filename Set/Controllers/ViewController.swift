@@ -19,9 +19,9 @@ class ViewController: UIViewController {
         }
     }
     
-    var cardViews = [CardView]()
-    
     lazy var game = Set()
+    var cardViews = [CardView]()
+    lazy var cardViewsGrid = Grid(layout: .aspectRatio(Constant.cardAspectRatio), frame: cardsMatView.bounds)
 
     
     //    MARK: - Outlets
@@ -37,24 +37,16 @@ class ViewController: UIViewController {
         updateCardsView()
     }
     
-    @IBAction func dealCards(_ sender: UIButton) {
-        if dealCardsButton.isEnabled == false { return }
-        if !game.replaceCards() {
-            for _ in 1...3 {
-                _ = game.openCardFromDeck()
-            }
-        }
+    @IBAction func touchDealCardsButton(_ sender: UIButton) {
+        dealCards()
         updateCardsView()
     }
     
     
     
     // MARK: - Functions
-
-    
     func updateCardsView() {
     }
-    
     
     private func removeCardViews() {
         for cardView in cardViews {
@@ -62,38 +54,6 @@ class ViewController: UIViewController {
         }
         cardViews.removeAll()
     }
-    
-    
-    private func setup() {
-        removeCardViews()
-        game = Set()
-        
-        var grid = Grid(layout: .aspectRatio(64/89), frame: cardsMatView.bounds)
-        grid.cellCount = initialVisibleCards
-        
-        for i in 0..<initialVisibleCards {
-            if let gridRect = grid[i] {
-                let width = gridRect.width * 0.9
-                let height = width * 89/64
-                openCardView(at: gridRect.origin, size: CGSize(width: width, height: height))
-            }
-        }
-    }
-    
-    private func openCardView(at origin: CGPoint, size: CGSize) {
-        let cardRect = CGRect(origin: origin, size: size)
-        let cardView = CardView(frame: cardRect)
-        cardViews.append(cardView)
-        cardsMatView.addSubview(cardView)
-        if let card = game.openCardFromDeck() {
-            cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
-                                   number: Card.Number(rawValue: card.numberId)!,
-                                   shade: Card.Shade(rawValue: card.shadingId)!,
-                                   color: Card.Color(rawValue: card.colorId)!)
-        }
-    }
-    
-    
     
     //    MARK: - etc
     
@@ -119,6 +79,76 @@ class ViewController: UIViewController {
 }
 
 
+// ViewConrroller Private functions
+extension ViewController {
+    private func dealCards() {
+        for _ in 0..<3 {
+            cardViewsGrid.cellCount += 1
+            let lastCellIndex = cardViewsGrid.cellCount - 1
+            if let lastCellRect = cardViewsGrid[lastCellIndex] {
+                let width = lastCellRect.width * 0.9
+                let height = width * (1/Constant.cardAspectRatio)
+                openCardView(at: lastCellRect.origin, size: CGSize(width: width, height: height))
+            }
+        }
+        rearrangeCardViews()
+    }
+    
+    private func setup() {
+        removeCardViews()
+        game = Set()
+        
+        cardViewsGrid.cellCount = initialVisibleCards
+        
+        for i in 0..<initialVisibleCards {
+            if let gridRect = cardViewsGrid[i] {
+                openCardView(at: cardOrigin(origin: gridRect.origin, size: gridRect.size),
+                             size: cardSize(from: gridRect.size))
+            }
+        }
+    }
+    
+    private func openCardView(at origin: CGPoint, size: CGSize) {
+        let cardRect = CGRect(origin: origin, size: size)
+        let cardView = CardView(frame: cardRect)
+        cardViews.append(cardView)
+        cardsMatView.addSubview(cardView)
+        if let card = game.openCardFromDeck() {
+            cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
+                                   number: Card.Number(rawValue: card.numberId)!,
+                                   shade: Card.Shade(rawValue: card.shadingId)!,
+                                   color: Card.Color(rawValue: card.colorId)!)
+        }
+    }
+    
+    private func rearrangeCardViews() {
+        for i in cardViews.indices {
+            if let cell = cardViewsGrid[i] {
+                cardViews[i].frame.origin = cardOrigin(origin: cell.origin, size: cell.size)
+                cardViews[i].frame.size = cardSize(from: cell.size)
+            }
+        }
+    }
+    
+    private func cardOrigin(origin: CGPoint, size: CGSize) -> CGPoint {
+        let offsetWidth = (size.width - size.width*Constant.cardShrinkRatio) / 2
+        let offsetHeight = (size.height - size.height*Constant.cardShrinkRatio) / 2
+        return origin.offset(x: offsetWidth, y: offsetHeight)
+    }
+    private func cardSize(from size: CGSize) -> CGSize {
+        return size.shrink(to: Constant.cardShrinkRatio)
+    }
+}
+
+
+extension ViewController {
+    private struct Constant {
+        static let cardAspectRatio: CGFloat = 64/89
+        static let cardShrinkRatio: CGFloat = 0.9
+    }
+}
+
+
 
 // MARK: - ViewController Gestures
 extension ViewController {
@@ -134,11 +164,25 @@ extension ViewController {
     }
     
     private func registerGestures() {
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealCards(_:)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(touchDealCardsButton(_:)))
         swipe.direction = [UISwipeGestureRecognizerDirection.down]
         view.addGestureRecognizer(swipe)
         
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
         view.addGestureRecognizer(rotation)
+    }
+}
+
+
+
+extension CGSize {
+    func shrink(to ratio: CGFloat) -> CGSize {
+        return CGSize(width: self.width*ratio, height: self.height*ratio)
+    }
+}
+
+extension CGPoint {
+    func offset(x: CGFloat, y: CGFloat) -> CGPoint {
+        return CGPoint(x: self.x + x, y: self.y + y)
     }
 }
