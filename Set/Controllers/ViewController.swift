@@ -32,11 +32,6 @@ class ViewController: UIViewController {
     
     
     //    MARK: - Actions
-    @IBAction func touchCard(_ sender: UIButton) {
-        game.selectCard(at: sender.tag)
-        updateCardsView()
-    }
-    
     @IBAction func startNewGame(_ sender: UIButton) {
         setup()
         updateCardsView()
@@ -55,36 +50,6 @@ class ViewController: UIViewController {
     
     
     // MARK: - Functions
-    
-    // de/highlight the card button depends on the corresponding card
-    func highlightCard(cardButton: UIButton) {
-        // default: de-highlight
-        cardButton.layer.borderWidth = 0
-        cardButton.layer.borderColor = nil
-        
-        if game.selectedCards.contains(where: {$0.id == cardButton.tag}) {
-            cardButton.layer.borderWidth = 2.0
-            cardButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-            
-            if game.selectedCards.count == 3 {
-                cardButton.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-            }
-        }
-        if game.matchedCards.contains(where: {$0.id == cardButton.tag}) {
-            cardButton.layer.borderWidth = 2.0
-            cardButton.layer.borderColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
-        }
-    }
-    
-    // return a corresponding card object from a card button
-    func card(of cardButton: UIButton) -> Card? {
-        let cards = game.openCards.filter({$0.id == cardButton.tag})
-        if cards.count == 1 {
-            return cards.first
-        } else {
-            return nil
-        }
-    }
 
     
     func updateCardsView() {
