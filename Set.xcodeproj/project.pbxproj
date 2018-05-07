@@ -62,18 +62,42 @@
 		B633406E201F465F00161CE1 /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				B6F1DCF020A0744D00384F5D /* Controllers */,
+				B6F1DCEF20A0743B00384F5D /* Views */,
+				B6F1DCEE20A0742500384F5D /* Model */,
 				B633406F201F465F00161CE1 /* AppDelegate.swift */,
-				B6334071201F465F00161CE1 /* ViewController.swift */,
-				B6CAECAB209D75EE00549FAE /* CardView.swift */,
 				B6334073201F465F00161CE1 /* Main.storyboard */,
-				B6D12C182030113700799F77 /* Set.swift */,
-				B6CAECAF209F348000549FAE /* Grid.swift */,
-				B6D12C1A2030133500799F77 /* Card.swift */,
 				B6334076201F465F00161CE1 /* Assets.xcassets */,
 				B6334078201F465F00161CE1 /* LaunchScreen.storyboard */,
 				B633407B201F465F00161CE1 /* Info.plist */,
 			);
 			path = Set;
+			sourceTree = "<group>";
+		};
+		B6F1DCEE20A0742500384F5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B6D12C182030113700799F77 /* Set.swift */,
+				B6CAECAF209F348000549FAE /* Grid.swift */,
+				B6D12C1A2030133500799F77 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B6F1DCEF20A0743B00384F5D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6CAECAB209D75EE00549FAE /* CardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B6F1DCF020A0744D00384F5D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6334071201F465F00161CE1 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
