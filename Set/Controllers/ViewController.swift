@@ -29,14 +29,9 @@ class ViewController: UIViewController {
     
     lazy var game = Set(figures: figures.count, number: number.count,
                         shading: shading.count, color: color.count)
-    
-    var openedCardButtons: [UIButton]? {
-        return cardButtons.filter({$0.tag != 0})
-    }
 
     
     //    MARK: - Outlets
-    @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -115,76 +110,11 @@ class ViewController: UIViewController {
             return nil
         }
     }
-    
-    func hideCard(of cardButton: UIButton) {
-        cardButton.layer.opacity = 0
-        cardButton.tag = 0
-    }
-    
-    func openCard(of cardButton: UIButton) {
-        if game.openCards.count < cardButtons.count {
-            if let card = game.openCardFromDeck() {
-                cardButton.tag = card.id
-                drawCardButton(cardButton: cardButton)
-            }
-        }
-    }
+
     
     func updateCardsView() {
-        var cardButtonIndicesToReplace: [Int] = []
-        var newlyOpenedCardTags: [Int] = []
-        
-        // Find out which cardButton indices are going to be replaced
-        // and which cards (tags) are newly opened.
-        // Then replace the cards' tags which have that indices with newly opened cards' tags.
-        for i in 0..<game.openCards.count {
-            if !cardButtons.contains(where: {$0.tag == game.openCards[i].id}) {
-                newlyOpenedCardTags.append(game.openCards[i].id)
-            }
-            if !game.openCards.contains(where: {$0.id == cardButtons[i].tag}) {
-                cardButtonIndicesToReplace.append(i)
-            }
-        }
-        
-        // TODO: if there are no cards to replace (empty deck), what will happen
-        // workaround
-        for i in 0..<newlyOpenedCardTags.count {
-            cardButtons[cardButtonIndicesToReplace[i]].tag = newlyOpenedCardTags[i]
-            drawCardButton(cardButton: cardButtons[cardButtonIndicesToReplace[i]])
-        }
-        
-        for cardButton in cardButtons {
-            if card(of: cardButton) != nil {
-            } else {
-                // hide matched cards when there's no cards to deal from the deck
-                hideCard(of: cardButton)
-            }
-            highlightCard(cardButton: cardButton)
-        }
-        // when cards matched these cards are keep opened until a next card is selected
-        // so exclude these already matched but open cards to deal new cards
-        if game.cardsInDeck.count == 0 ||
-           (game.openCards.count == cardButtons.count && game.cardsToReplace() == nil) {
-            dealCardsButton.isEnabled = false
-        } else {
-            dealCardsButton.isEnabled = true
-        }
-        score = game.score
     }
     
-    private func reset() {
-        for cardButton in cardButtons {
-            hideCard(of: cardButton)
-            drawCardButton(cardButton: cardButton)
-        }
-        game = Set(figures: figures.count, number: number.count,
-                   shading: shading.count, color: color.count)
-        for i in 0..<initialVisibleCards {
-            openCard(of: cardButtons[i])
-            highlightCard(cardButton: cardButtons[i])
-        }
-        score = game.score
-    }
     
     private func setup() {
         cardViews.removeAll()
