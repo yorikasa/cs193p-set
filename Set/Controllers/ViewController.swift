@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchDealCardsButton(_ sender: UIButton) {
-        dealCards()
+        dealCards(3)
         updateCardsView()
     }
     
@@ -81,44 +81,35 @@ class ViewController: UIViewController {
 
 // ViewConrroller Private functions
 extension ViewController {
-    private func dealCards() {
-        for _ in 0..<3 {
-            cardViewsGrid.cellCount += 1
-            let lastCellIndex = cardViewsGrid.cellCount - 1
-            if let lastCellRect = cardViewsGrid[lastCellIndex] {
-                let width = lastCellRect.width * 0.9
-                let height = width * (1/Constant.cardAspectRatio)
-                openCardView(at: lastCellRect.origin, size: CGSize(width: width, height: height))
+    private func setup() {
+        removeCardViews()
+        cardViewsGrid.cellCount = 0
+        game = Set()
+        
+        dealCards(initialVisibleCards)
+    }
+    
+    private func dealCards(_ number: Int) {
+        for _ in 0..<number {
+            if let card = game.openCardFromDeck() {
+                cardViewsGrid.cellCount += 1
+                if let lastCellRect = cardViewsGrid[cardViewsGrid.cellCount - 1] {
+                    let cardRect = CGRect(origin: cardOrigin(origin: lastCellRect.origin, size: lastCellRect.size), size: cardSize(from: lastCellRect.size))
+                    openCardView(of: card, at: cardRect)
+                }
             }
         }
         rearrangeCardViews()
     }
     
-    private func setup() {
-        removeCardViews()
-        game = Set()
-        
-        cardViewsGrid.cellCount = initialVisibleCards
-        
-        for i in 0..<initialVisibleCards {
-            if let gridRect = cardViewsGrid[i] {
-                openCardView(at: cardOrigin(origin: gridRect.origin, size: gridRect.size),
-                             size: cardSize(from: gridRect.size))
-            }
-        }
-    }
-    
-    private func openCardView(at origin: CGPoint, size: CGSize) {
-        let cardRect = CGRect(origin: origin, size: size)
+    private func openCardView(of card: Card, at cardRect: CGRect) {
         let cardView = CardView(frame: cardRect)
         cardViews.append(cardView)
         cardsMatView.addSubview(cardView)
-        if let card = game.openCardFromDeck() {
-            cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
-                                   number: Card.Number(rawValue: card.numberId)!,
-                                   shade: Card.Shade(rawValue: card.shadingId)!,
-                                   color: Card.Color(rawValue: card.colorId)!)
-        }
+        cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
+                               number: Card.Number(rawValue: card.numberId)!,
+                               shade: Card.Shade(rawValue: card.shadingId)!,
+                               color: Card.Color(rawValue: card.colorId)!)
     }
     
     private func rearrangeCardViews() {
