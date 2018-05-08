@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     // MARK: - Functions
     func updateCardsView() {
-        
+        assert(cardViews.count == game.openCards.count, "model != view")
     }
     
     private func removeCardViews() {
@@ -112,6 +112,7 @@ extension ViewController {
                                number: Card.Number(rawValue: card.numberId)!,
                                shade: Card.Shade(rawValue: card.shadingId)!,
                                color: Card.Color(rawValue: card.colorId)!)
+        registerCardViewGestures(cardView: cardView)
     }
     
     private func rearrangeCardViews() {
@@ -156,6 +157,19 @@ extension ViewController {
         }
     }
     
+    @objc private func tapCard(_ sender: UIGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            if let cardView = sender.view as? CardView {
+                game.selectCard(at: cardView.id)
+                cardView.isSelected = !cardView.isSelected
+                // TODO: implement (maybe i should use updateCardsView())
+            }
+        default:
+            break
+        }
+    }
+    
     private func registerGestures() {
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(touchDealCardsButton(_:)))
         swipe.direction = [UISwipeGestureRecognizerDirection.down]
@@ -163,6 +177,11 @@ extension ViewController {
         
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
         view.addGestureRecognizer(rotation)
+    }
+    
+    private func registerCardViewGestures(cardView: CardView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCard(_:)))
+        cardView.addGestureRecognizer(tap)
     }
 }
 

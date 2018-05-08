@@ -123,7 +123,6 @@ class CardView: UIView {
 extension CardView {
     private func setup() {
         self.isOpaque = false
-        registerGestures()
     }
     
     private func drawFigure() {
@@ -229,22 +228,6 @@ extension CardView {
     }
 }
 
-// CardView Gestures
-extension CardView {
-    @objc private func tapCard(_ sender: UIGestureRecognizer) {
-        switch sender.state {
-        case .ended:
-            self.isSelected = !self.isSelected
-        default:
-            break
-        }
-    }
-    
-    private func registerGestures() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCard(_:)))
-        self.addGestureRecognizer(tap)
-    }
-}
 
 // why should I extend instead of simply implement these variables and functions???
 // ...so i googled and found: https://www.natashatherobot.com/using-swift-extensions/
