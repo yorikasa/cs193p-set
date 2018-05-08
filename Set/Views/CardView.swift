@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable
 class CardView: UIView {
+    var id: Int =  0
+    
     var figure = Card.Figure.circle {
         didSet {
             setNeedsDisplay()

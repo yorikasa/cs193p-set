@@ -46,6 +46,7 @@ class ViewController: UIViewController {
     
     // MARK: - Functions
     func updateCardsView() {
+        
     }
     
     private func removeCardViews() {
@@ -106,6 +107,7 @@ extension ViewController {
         let cardView = CardView(frame: cardRect)
         cardViews.append(cardView)
         cardsMatView.addSubview(cardView)
+        cardView.id = card.id
         cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
                                number: Card.Number(rawValue: card.numberId)!,
                                shade: Card.Shade(rawValue: card.shadingId)!,
