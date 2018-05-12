@@ -157,6 +157,10 @@ extension ViewController {
     }
     
     private func dealCards(_ number: Int) {
+        // if there's any card to replace, then replace them and do norhing more
+        if game.replaceCards() {
+            return
+        }
         for _ in 0..<number {
             if let card = game.openCardFromDeck() {
                 cardViewsGrid.cellCount += 1
