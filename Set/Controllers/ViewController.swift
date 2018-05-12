@@ -85,6 +85,8 @@ class ViewController: UIViewController {
         
         if game.cardsInDeck.count == 0 {
             dealCardsButton.isEnabled = false
+        } else {
+            dealCardsButton.isEnabled = true
         }
         rearrangeCardViews()
     }
