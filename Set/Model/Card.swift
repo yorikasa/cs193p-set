@@ -40,6 +40,9 @@ struct Card: Equatable {
         case red
     }
     
+    var isSelected = false
+    var isMatched = false
+    
     static private var idGenerator = 0
     
     static private func createId() -> Int {

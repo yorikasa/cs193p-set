@@ -13,78 +13,73 @@ class Set {
     var score: Int
     
     // cards
-    var openCards: [Card] = []
-    var selectedCards: [Card] = []
-    var matchedCards: [Card] = []
-    var cardsInDeck: [Card] = []
+    var openCards = [Card]()
+    var selectedCards: [Card] {
+        return openCards.filter({$0.isSelected == true})
+    }
+    var matchedCards: [Card] {
+        return openCards.filter({$0.isMatched == true})
+    }
+    var cardsInDeck = [Card]()
     
     //    MARK: - Methods
     
     func selectCard(at id: Int) {
-        // if there's any card to replace, then replace them and do nothing
+        // if there's any card to replace, then replace them
         _ = replaceCards()
         
         if let cardIndex = openCards.index(where: {$0.id == id}) {
             // If already selected, then deselect (true -> false)
             // If not selected, then select (false -> true)
-            if let selectedCardIndex = selectedCards.index(where: {$0.id == id}) {
-                selectedCards.remove(at: selectedCardIndex)
-            } else {
-                selectedCards.append(openCards[cardIndex])
-            }
+            openCards[cardIndex].isSelected = !openCards[cardIndex].isSelected
         }
         
-        // New card selected after 3 cards were un/matched
+        // New card was selected after 3 cards were un/matched
         // (already 3 cards are selected)
-        //
-        // Reset all selected cards states to unselected, and select the new card
         if selectedCards.count > 3 {
-            selectedCards.removeAll()
-            matchedCards.removeAll()
+            // Reset all selected cards states to unselected
+            for i in openCards.indices {
+                openCards[i].isSelected = false
+                openCards[i].isMatched = false
+            }
+            // then select a new card
             if let cardIndex = openCards.index(where: {$0.id == id}) {
-                selectedCards.append(openCards[cardIndex])
+                openCards[cardIndex].isSelected = true
             }
         }
-        // New card is the 3rd card to the selection
-        //
-        // Check if these 3 cards match
+            
+        // The 3rd card was selected
         else if selectedCards.count == 3 {
+            // Check if these 3 cards match
             if doesFormSet(with: selectedCards) {
-                // three cards formed a set
                 for card in selectedCards {
-                    matchedCards.append(card)
+                    if let index = openCards.index(where: {$0.id == card.id}) {
+                        openCards[index].isMatched = true
+                    }
                 }
                 score += 3
             } else {
                 score -= 3
             }
         }
+            
         // This is the first/2nd card selected
         else {
             // Do nothing
         }
     }
-    
-    func cardsToReplace() -> [Card]? {
-        var cards: [Card]? = nil
-        for cardIndex in openCards.indices.reversed() {
-            if matchedCards.contains(openCards[cardIndex]) {
-                if cards == nil {
-                    cards = [Card]()
-                }
-                cards?.append(openCards[cardIndex])
-            }
-        }
-        return cards
-    }
-    
+
     // if there are cards to be replaced (matched in a previous selection)
     // close these cards and replace them with new cards from the deck
     func replaceCards() -> Bool{
-        if let cards = cardsToReplace() {
-            for card in cards {
-                openCards.remove(at: openCards.index(of: card)!)
-                _ = openCardFromDeck()
+        if matchedCards.count > 0 {
+            for card in matchedCards {
+                print(card)
+                if let index = openCards.index(of: card) {
+                    openCards[index].isMatched = false
+                    openCards.remove(at: index)
+                    _ = openCardFromDeck()
+                }
             }
             return true
         } else {
@@ -103,7 +98,7 @@ class Set {
         return nil
     }
     
-    func doesFormSet(with cards: [Card]) -> Bool {
+    private func doesFormSet(with cards: [Card]) -> Bool {
         // for the test purpose
         return true
         

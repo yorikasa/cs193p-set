@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     lazy var game = Set()
     var cardViews = [CardView]()
-    lazy var cardViewsGrid = Grid(layout: .aspectRatio(Constant.cardAspectRatio))
+    var cardViewsGrid = Grid(layout: .aspectRatio(Constant.cardAspectRatio))
     var rotated = false
 
     
@@ -65,7 +65,6 @@ class ViewController: UIViewController {
                     openCardView(of: game.openCards[cardIndex], with: cardRect, at: index)
                 }
             }
-            
         }
     }
     
@@ -127,7 +126,6 @@ class ViewController: UIViewController {
             rearrangeCardViews()
             rotated = false
         }
-        
     }
 }
 
