@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     
     lazy var game = Set()
     var cardViews = [CardView]()
-    lazy var cardViewsGrid = Grid(layout: .aspectRatio(Constant.cardAspectRatio), frame: cardsMatView.bounds)
+    lazy var cardViewsGrid = Grid(layout: .aspectRatio(Constant.cardAspectRatio))
+    var rotated = false
 
     
     //    MARK: - Outlets
@@ -100,15 +101,6 @@ class ViewController: UIViewController {
     
     //    MARK: - etc
     
-    // when this view controller's `viewDidLoad()` gets called,
-    // its subviews don't be adjusted their layout
-    // for now I'm not sure its' recommended way of get subview's proper dimension
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        setup()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,6 +111,24 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection != nil {
+            rotated = true
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if rotated {
+            cardViewsGrid.frame = cardsMatView.bounds
+            rearrangeCardViews()
+            rotated = false
+        }
+        
+    }
 }
 
 
@@ -126,6 +136,7 @@ class ViewController: UIViewController {
 extension ViewController {
     private func setup() {
         removeCardViews()
+        cardViewsGrid.frame = cardsMatView.bounds
         cardViewsGrid.cellCount = 0
         game = Set()
         
@@ -191,6 +202,7 @@ extension ViewController {
 }
 
 
+//MARK: - Constants
 extension ViewController {
     private struct Constant {
         static let cardAspectRatio: CGFloat = 64/89
@@ -242,7 +254,7 @@ extension ViewController {
 }
 
 
-
+//MARK: - Other Extensions
 extension CGSize {
     func shrink(to ratio: CGFloat) -> CGSize {
         return CGSize(width: self.width*ratio, height: self.height*ratio)
