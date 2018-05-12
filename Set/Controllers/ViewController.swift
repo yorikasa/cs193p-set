@@ -242,7 +242,11 @@ extension ViewController {
     @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
         switch sender.state {
         case .ended:
-            print("rotated: \(sender.rotation)")
+            for _ in 0...100 {
+                let rand1 = (0...cardViews.count).random
+                let rand2 = (0...cardViews.count).random
+                cardViews.swapAt(rand1, rand2)
+            }
             updateCardsView()
         default:
             break
