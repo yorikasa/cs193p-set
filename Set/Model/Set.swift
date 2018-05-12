@@ -74,7 +74,6 @@ class Set {
     func replaceCards() -> Bool{
         if matchedCards.count > 0 {
             for card in matchedCards {
-                print(card)
                 if let index = openCards.index(of: card) {
                     openCards[index].isMatched = false
                     openCards.remove(at: index)
@@ -100,7 +99,7 @@ class Set {
     
     private func doesFormSet(with cards: [Card]) -> Bool {
         // for the test purpose
-        return true
+        //return true
         
         // If all attributes of 3 cards are either different or same, they make a set
         // e.g. figures of all cards are same (●)

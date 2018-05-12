@@ -66,6 +66,20 @@ class ViewController: UIViewController {
                 }
             }
         }
+        for cardView in cardViews {
+            if let card = game.openCards.filter({$0.id == cardView.id}).first {
+                cardView.isSelected = card.isSelected
+                if game.selectedCards.count == 3, game.selectedCards.contains(card) {
+                    if card.isMatched {
+                        cardView.status = .matched
+                    } else {
+                        cardView.status = .unmatched
+                    }
+                } else {
+                    cardView.status = .normal
+                }
+            }
+        }
     }
     
     private func printCardViews() {
@@ -228,7 +242,6 @@ extension ViewController {
         case .ended:
             if let cardView = sender.view as? CardView {
                 game.selectCard(at: cardView.id)
-                cardView.isSelected = !cardView.isSelected
                 updateCardsView()
             }
         default:
