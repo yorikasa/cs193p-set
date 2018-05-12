@@ -80,6 +80,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+        score = game.score
     }
     
     private func printCardViews() {
