@@ -47,7 +47,6 @@ class ViewController: UIViewController {
     
     // MARK: - Functions
     func updateCardsView() {
-        assert(cardViews.count == game.openCards.count, "model \(cardViews.count) != view \(game.openCards.count)")
         let cardViewIds = cardViews.map({$0.id})
         let cardIds = game.openCards.map({$0.id})
         let diff = idDifference(cardIds: cardIds, cardViewIds: cardViewIds)
@@ -61,8 +60,10 @@ class ViewController: UIViewController {
                 cardViews[index].removeFromSuperview()
                 cardViews.remove(at: index)
                 
-                if let cardIndex = game.openCards.index(where: {$0.id == diff.added[i]}) {
-                    openCardView(of: game.openCards[cardIndex], with: cardRect, at: index)
+                if i < diff.added.count {
+                    if let cardIndex = game.openCards.index(where: {$0.id == diff.added[i]}) {
+                        openCardView(of: game.openCards[cardIndex], with: cardRect, at: index)
+                    }
                 }
             }
         }
@@ -81,6 +82,11 @@ class ViewController: UIViewController {
             }
         }
         score = game.score
+        
+        if game.cardsInDeck.count == 0 {
+            dealCardsButton.isEnabled = false
+        }
+        rearrangeCardViews()
     }
     
     private func printCardViews() {
@@ -186,6 +192,7 @@ extension ViewController {
     }
     
     private func rearrangeCardViews() {
+        cardViewsGrid.cellCount = cardViews.count
         for i in cardViews.indices {
             if let cell = cardViewsGrid[i] {
                 cardViews[i].frame.origin = cardOrigin(origin: cell.origin, size: cell.size)
