@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SetViewController: UIViewController {
     
     //    MARK: - Instance Variables
     
@@ -154,7 +154,7 @@ class ViewController: UIViewController {
 
 
 // ViewConrroller Private functions
-extension ViewController {
+extension SetViewController {
     private func setup() {
         removeCardViews()
         cardViewsGrid.frame = cardsMatView.bounds
@@ -229,7 +229,7 @@ extension ViewController {
 
 
 //MARK: - Constants
-extension ViewController {
+extension SetViewController {
     private struct Constant {
         static let cardAspectRatio: CGFloat = 64/89
         static let cardShrinkRatio: CGFloat = 0.9
@@ -239,7 +239,7 @@ extension ViewController {
 
 
 // MARK: - ViewController Gestures
-extension ViewController {
+extension SetViewController {
     // sorry it actually is reversed
     @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
         switch sender.state {
