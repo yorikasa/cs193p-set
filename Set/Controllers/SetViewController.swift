@@ -29,6 +29,8 @@ class SetViewController: UIViewController {
     @IBOutlet weak var dealCardsButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var cardsMatView: UIView!
+    @IBOutlet weak var deckOfCardsView: CardView!
+    @IBOutlet weak var discardPileView: CardView!
     
     
     
@@ -161,6 +163,9 @@ extension SetViewController {
         cardViewsGrid.cellCount = 0
         game = Set()
         
+        discardPileView.isHidden = true
+        deckOfCardsView.isHidden = false
+        
         dealCards(initialVisibleCards)
     }
     
@@ -274,6 +279,9 @@ extension SetViewController {
         
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
         view.addGestureRecognizer(rotation)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(touchDealCardsButton(_:)))
+        deckOfCardsView.addGestureRecognizer(tap)
     }
     
     private func registerCardViewGestures(cardView: CardView) {

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -91,7 +92,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2z-Se-PbO">
-                                        <rect key="frame" x="166.66666666666666" y="0.0" width="11" height="30"/>
+                                        <rect key="frame" x="166" y="0.0" width="11" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="tF0-j4-oR9"/>
                                         </constraints>
@@ -114,7 +115,25 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpB-ip-GT8">
-                                <rect key="frame" x="16" y="52" width="343" height="631"/>
+                                <rect key="frame" x="16" y="148" width="343" height="535"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yK-Ik-ZrU" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="15.999999999999996" y="52" width="57.666666666666657" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="O3Y-3G-Qmn"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUs-eA-N25" customClass="CardView" customModule="Set" customModuleProvider="target">
+                                <rect key="frame" x="301" y="52" width="58" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hUs-eA-N25" secondAttribute="height" multiplier="64:89" id="gpm-H7-agb"/>
+                                    <constraint firstAttribute="height" constant="80" id="tbE-Mw-D34"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -122,23 +141,69 @@
                             <constraint firstItem="jpB-ip-GT8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="4sY-QC-PM1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jpB-ip-GT8" secondAttribute="trailing" constant="16" id="8Pu-Gk-xqk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gph-eW-a8K" secondAttribute="bottom" constant="8" id="C4O-DL-KlU"/>
+                            <constraint firstItem="7yK-Ik-ZrU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DGG-ZN-tyW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gph-eW-a8K" secondAttribute="trailing" constant="16" id="N8f-GB-t2p"/>
-                            <constraint firstItem="jpB-ip-GT8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="XPT-z8-QAr"/>
+                            <constraint firstItem="jpB-ip-GT8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="QQ0-bn-966"/>
+                            <constraint firstItem="jpB-ip-GT8" firstAttribute="leading" secondItem="hUs-eA-N25" secondAttribute="trailing" constant="16" id="T5z-Fc-lx7"/>
+                            <constraint firstItem="Ik2-5s-wFY" firstAttribute="top" secondItem="7yK-Ik-ZrU" secondAttribute="bottom" constant="8" id="TAs-iJ-r7M"/>
                             <constraint firstItem="gph-eW-a8K" firstAttribute="top" secondItem="jpB-ip-GT8" secondAttribute="bottom" constant="8" id="XYC-7v-bCk"/>
+                            <constraint firstItem="7yK-Ik-ZrU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="a20-eo-FtB"/>
+                            <constraint firstItem="7yK-Ik-ZrU" firstAttribute="width" secondItem="7yK-Ik-ZrU" secondAttribute="height" multiplier="64:89" id="akR-Sw-vcP"/>
+                            <constraint firstItem="hUs-eA-N25" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dg6-Wj-vfo"/>
+                            <constraint firstItem="7yK-Ik-ZrU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="gSe-yM-GZY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7yK-Ik-ZrU" secondAttribute="bottom" constant="46" id="hTu-r8-fhv"/>
                             <constraint firstItem="gph-eW-a8K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="i03-ZT-gNX"/>
+                            <constraint firstItem="hUs-eA-N25" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="kAN-qb-Sjx">
+                                <variation key="heightClass=compact" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="jpB-ip-GT8" firstAttribute="top" secondItem="hUs-eA-N25" secondAttribute="bottom" constant="16" id="mFY-Nv-RvF"/>
+                            <constraint firstItem="hUs-eA-N25" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="opA-19-l2C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hUs-eA-N25" secondAttribute="trailing" constant="16" id="sqf-YE-8PD"/>
+                            <constraint firstItem="hUs-eA-N25" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="yYB-uO-6xd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hTu-r8-fhv"/>
+                                <exclude reference="DGG-ZN-tyW"/>
+                                <exclude reference="QQ0-bn-966"/>
+                                <exclude reference="T5z-Fc-lx7"/>
+                                <exclude reference="dg6-Wj-vfo"/>
+                                <exclude reference="kAN-qb-Sjx"/>
+                                <exclude reference="yYB-uO-6xd"/>
+                                <exclude reference="TAs-iJ-r7M"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="hTu-r8-fhv"/>
+                                <exclude reference="sqf-YE-8PD"/>
+                                <exclude reference="DGG-ZN-tyW"/>
+                                <exclude reference="gSe-yM-GZY"/>
+                                <exclude reference="4sY-QC-PM1"/>
+                                <include reference="QQ0-bn-966"/>
+                                <include reference="T5z-Fc-lx7"/>
+                                <exclude reference="mFY-Nv-RvF"/>
+                                <include reference="dg6-Wj-vfo"/>
+                                <include reference="kAN-qb-Sjx"/>
+                                <exclude reference="opA-19-l2C"/>
+                                <exclude reference="yYB-uO-6xd"/>
+                                <include reference="TAs-iJ-r7M"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="opN-zG-nrp"/>
                     <connections>
                         <outlet property="cardsMatView" destination="jpB-ip-GT8" id="p7r-5v-pkj"/>
                         <outlet property="dealCardsButton" destination="Ik2-5s-wFY" id="Hfs-6s-Zsp"/>
+                        <outlet property="deckOfCardsView" destination="hUs-eA-N25" id="8Pk-j6-Vq6"/>
+                        <outlet property="discardPileView" destination="7yK-Ik-ZrU" id="sCr-VI-JcZ"/>
                         <outlet property="scoreLabel" destination="A2z-Se-PbO" id="RqH-zO-Qas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-660" y="-485"/>
+            <point key="canvasLocation" x="-660.59113300492618" y="-485.60000000000002"/>
         </scene>
         <!--Concentration Theme Chooser View Controller-->
         <scene sceneID="5vF-Ge-DN1">
@@ -218,7 +283,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTM-Ip-h1z">
-                                <rect key="frame" x="302.33333333333331" y="96" width="57.333333333333314" height="18"/>
+                                <rect key="frame" x="301.66666666666669" y="96" width="57.333333333333314" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -460,6 +525,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9oN-Tn-Zim"/>
+        <segue reference="rWE-Ca-1fv"/>
     </inferredMetricsTieBreakers>
 </document>
