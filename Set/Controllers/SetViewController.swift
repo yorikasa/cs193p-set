@@ -272,15 +272,25 @@ extension SetViewController {
         }
     }
     
+    @objc private func dealCardsAction(_ sender: UITapGestureRecognizer) {
+        switch sender.state {
+        case .ended:
+            dealCards(3)
+            updateCardsView()
+        default:
+            break
+        }
+    }
+    
     private func registerGestures() {
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(touchDealCardsButton(_:)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealCardsAction(_:)))
         swipe.direction = [UISwipeGestureRecognizerDirection.down]
         view.addGestureRecognizer(swipe)
         
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(shuffleCards(_:)))
         view.addGestureRecognizer(rotation)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(touchDealCardsButton(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dealCardsAction(_:)))
         deckOfCardsView.addGestureRecognizer(tap)
     }
     
