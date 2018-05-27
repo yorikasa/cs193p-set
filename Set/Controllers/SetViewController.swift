@@ -183,13 +183,18 @@ extension SetViewController {
                 }
             }
         }
-        rearrangeCardViews()
     }
     
     private func openCardView(of card: Card, with cardRect: CGRect, at index: Int? = nil) {
-        let cardView = CardView(frame: cardRect)
+        let deckFrameX = abs(cardsMatView.frame.minX - deckOfCardsView.frame.minX)
+        let deckFrameY = -abs(cardsMatView.frame.minY - deckOfCardsView.frame.minY)
+        let deckFrame = CGRect(x: deckFrameX, y: deckFrameY, width: deckOfCardsView.frame.width, height: deckOfCardsView.frame.height)
+        
+        let cardView = CardView(frame: deckFrame)
+        cardView.isFaceUp = false
         cardViews.insert(cardView, at: index ?? cardViews.endIndex)
         cardsMatView.addSubview(cardView)
+        
         cardView.id = card.id
         cardView.setAttributes(figure: Card.Figure(rawValue: card.figureId)!,
                                number: Card.Number(rawValue: card.numberId)!,
@@ -202,8 +207,24 @@ extension SetViewController {
         cardViewsGrid.cellCount = cardViews.count
         for i in cardViews.indices {
             if let cell = cardViewsGrid[i] {
-                cardViews[i].frame.origin = cardOrigin(origin: cell.origin, size: cell.size)
-                cardViews[i].frame.size = cardSize(from: cell.size)
+                // move card to the grid cell
+                UIView.animate(
+                    withDuration: 0.3, delay: 0, options: .curveEaseInOut,
+                    animations: {
+                      self.cardViews[i].frame.origin = self.cardOrigin(origin: cell.origin, size: cell.size)
+                      self.cardViews[i].frame.size = self.cardSize(from: cell.size)
+                    }
+                ) { (finished) in
+                    // flip card afterward
+                    if finished, !self.cardViews[i].isFaceUp {
+                        UIView.transition(
+                            with: self.cardViews[i], duration: 0.3, options: [.transitionFlipFromLeft],
+                            animations: {
+                                self.cardViews[i].isFaceUp = true
+                            }, completion: { (finished) in }
+                        )
+                    }
+                }
             }
         }
     }
