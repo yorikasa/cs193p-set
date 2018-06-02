@@ -25,9 +25,6 @@ class Set {
     //    MARK: - Methods
     
     func selectCard(at id: Int) {
-        // if there's any card to replace, then replace them
-        _ = replaceCards()
-        
         if let cardIndex = openCards.index(where: {$0.id == id}) {
             // If already selected, then deselect (true -> false)
             // If not selected, then select (false -> true)
@@ -58,6 +55,7 @@ class Set {
                     }
                 }
                 score += 3
+                _ = replaceCards()
             } else {
                 score -= 3
             }
