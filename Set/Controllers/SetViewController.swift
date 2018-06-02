@@ -59,8 +59,26 @@ class SetViewController: UIViewController {
             var cardRect = CGRect(origin: CGPoint.zero, size: CGSize.zero)
             if let index = cardViews.index(where: {$0.id == diff.missing[i]}) {
                 cardRect = cardViews[index].frame
-                cardViews[index].removeFromSuperview()
-                cardViews.remove(at: index)
+                let theCard = cardViews[index]
+                
+                let discardFrame = CGRect(x: discardPileView.frame.minX - cardsMatView.frame.minX,
+                                          y: discardPileView.frame.minY - cardsMatView.frame.minY,
+                                          width: discardPileView.frame.width,
+                                          height: discardPileView.frame.height)
+                UIView.transition(with: theCard, duration: 0.3, options: .curveEaseInOut,
+                                  animations: {
+                                    let indexOfTheCard = self.cardViews.index(of: theCard)!
+                                    self.cardViews.remove(at: indexOfTheCard)
+                                    theCard.frame = discardFrame
+                }) { (finished) in
+                    UIView.transition(with: theCard, duration: 0.3, options: .transitionFlipFromLeft,
+                                      animations: {
+                                        theCard.isFaceUp = false
+                    }, completion: { (finished) in
+                        self.discardPileView.isHidden = false
+                        theCard.removeFromSuperview()
+                    })
+                }
                 
                 if i < diff.added.count {
                     if let cardIndex = game.openCards.index(where: {$0.id == diff.added[i]}) {
