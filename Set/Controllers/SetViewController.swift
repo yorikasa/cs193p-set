@@ -61,10 +61,7 @@ class SetViewController: UIViewController {
                 cardRect = cardViews[index].frame
                 let theCard = cardViews[index]
                 
-                let discardFrame = CGRect(x: discardPileView.frame.minX - cardsMatView.frame.minX,
-                                          y: discardPileView.frame.minY - cardsMatView.frame.minY,
-                                          width: discardPileView.frame.width,
-                                          height: discardPileView.frame.height)
+                let discardFrame = view.convert(discardPileView.frame, to: cardsMatView)
                 UIView.transition(with: theCard, duration: 0.3, options: .curveEaseInOut,
                                   animations: {
                                     let indexOfTheCard = self.cardViews.index(of: theCard)!
@@ -204,10 +201,7 @@ extension SetViewController {
     }
     
     private func openCardView(of card: Card, with cardRect: CGRect, at index: Int? = nil) {
-        let deckFrameX = abs(cardsMatView.frame.minX - deckOfCardsView.frame.minX)
-        let deckFrameY = -abs(cardsMatView.frame.minY - deckOfCardsView.frame.minY)
-        let deckFrame = CGRect(x: deckFrameX, y: deckFrameY, width: deckOfCardsView.frame.width, height: deckOfCardsView.frame.height)
-        
+        let deckFrame = view.convert(deckOfCardsView.frame, to: cardsMatView)
         let cardView = CardView(frame: deckFrame)
         cardView.isFaceUp = false
         cardViews.insert(cardView, at: index ?? cardViews.endIndex)
