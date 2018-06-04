@@ -145,6 +145,14 @@ class SetViewController: UIViewController {
         
         registerGestures()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if cardViews.count == 0  {
+            setup()
+            updateCardsView()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
